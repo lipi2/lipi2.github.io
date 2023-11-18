@@ -11,20 +11,27 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start; /* Align content at the top */
+      justify-content: center; /* Center content vertically */
       height: 100vh; /* Set the body height to the full viewport height */
       margin: 0; /* Remove default margin */
     }
 
-    .text-container {
-      text-align: center; /* Center text within the container */
-      margin-top: 20px; /* Increase the margin-top to create more space */
+    .container {
+      display: flex;
+      justify-content: space-around; /* Separate columns with space around */
+      align-items: center;
+      width: 80%; /* Adjust width as needed */
+    }
+
+    .column {
+      text-align: center;
+      max-width: 30%;
     }
 
     img {
-      max-width: 100%;
-      max-height: 30vh;
-      margin-top: 120px; /* Add some space above the image */
+      max-width: 30%;
+      max-height: 70vh;
+      margin-top: 20px; /* Add some space above the image */
       margin-bottom: 20px; /* Add some space below the image */
     }
 
@@ -34,11 +41,17 @@
   </style>
 </head>
 <body>
-  <div class="text-container">
-    <h1>Hello, World!</h1>
-    <p>This is my first stylish web page.</p>
+  <div class="container">
+    <div class="column">
+      <img src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/20211115_165108.jpg" alt="Description of the image">
+    </div>
+    <div class="column">
+      <h1>Hello, World!</h1>
+      <p>This is my first stylish web page.</p>
+    </div>
+    <div class="column">
+      <img src="https://raw.githubusercontent.com/lipi2/img_test/main/DRO_00.jpg" alt="DRO logo">
+    </div>
   </div>
-  <img src="https://raw.githubusercontent.com/lipi2/img_test/main/DRO_00.jpg" alt="DRO logo">
-  <img src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
 </body>
 </html>
