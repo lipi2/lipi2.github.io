@@ -9,50 +9,42 @@
       background-color: black;
       color: green;
       display: flex;
-      flex-direction: row; /* Change to a row layout */
+      flex-direction: column;
       align-items: center;
-      justify-content: space-around; /* Distribute columns along the row */
+      justify-content: flex-start; /* Align content at the top */
       height: 100vh; /* Set the body height to the full viewport height */
       margin: 0; /* Remove default margin */
     }
 
-    .column {
-      text-align: center;
-      max-width: 30%;
+    .text-container {
+      text-align: center; /* Center text within the container */
+      margin-top: 20px; /* Increase the margin-top to create more space */
     }
 
     img {
       max-width: 100%;
-      max-height: 70vh;
-      margin-top: 20px; /* Add some space above the image */
+      max-height: 30vh;
+      margin-top: 120px; /* Add some space above the image */
       margin-bottom: 20px; /* Add some space below the image */
+    }
+
+    #pilar {
+      position: relative; /* Set the position property to relative */
+      top: 50px; /* Adjust the top position */
+      left: 20px; /* Adjust the left position */
     }
 
     h1, p {
       margin: 0; /* Remove margin for h1 and p */
     }
-
-    .centered-image {
-      max-width: 50%;
-      max-height: 20vh;
-      margin-top: 20px; /* Add some space above the image */
-      margin-bottom: 20px; /* Add some space below the image */
-    }
   </style>
 </head>
 <body>
-  <div class="column">
+  <div class="text-container">
     <h1>Hello, World!</h1>
     <p>This is my first stylish web page.</p>
   </div>
-  <div class="column">
-    <img src="https://raw.githubusercontent.com/lipi2/img_test/main/DRO_00.jpg" alt="DRO logo">
-  </div>
-  <div class="column">
-    <img src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
-  </div>
-  <div class="column">
-    <img src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
-  </div>
+  <img src="https://raw.githubusercontent.com/lipi2/img_test/main/DRO_00.jpg" alt="DRO logo">
+  <img id="pilar" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
 </body>
 </html>
