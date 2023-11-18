@@ -16,28 +16,6 @@
       margin: 0; /* Remove default margin */
     }
 
-    .container {
-      max-width: 800px; /* Set a maximum width for the content */
-      width: 100%;
-      text-align: center; /* Center text within the container */
-      position: relative; /* Position relative for absolute positioning of pillars */
-    }
-
-    .pillar {
-      position: absolute; /* Position pillars absolutely within the container */
-      background-color: #333; /* Adjust color as needed */
-      width: 10px; /* Adjust the width of the pillars */
-      height: 100vh; /* Full height of the viewport */
-    }
-
-    .left-pillar {
-      left: 0; /* Position the left pillar at the left edge of the container */
-    }
-
-    .right-pillar {
-      right: 0; /* Position the right pillar at the right edge of the container */
-    }
-
     img {
       max-width: 100%;
       max-height: 30vh;
@@ -46,7 +24,7 @@
     }
 
     .text-container {
-      text-align: left; /* Align text to the left */
+      text-align: center; /* Center text within the container */
       margin-top: 40px; /* Increase the margin-top to create more space */
     }
 
@@ -56,14 +34,10 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="pillar left-pillar"></div>
-    <img src="https://raw.githubusercontent.com/lipi2/img_test/main/DRO_00.jpg" alt="DRO logo">
-    <div class="text-container">
-      <h1>Hello, World!</h1>
-      <p>This is my first stylish web page.</p>
-    </div>
-    <div class="pillar right-pillar"></div>
+  <img src="https://raw.githubusercontent.com/lipi2/img_test/main/DRO_00.jpg" alt="DRO logo">
+  <div class="text-container">
+    <h1>Hello, World!</h1>
+    <p>This is my first stylish web page.</p>
   </div>
 </body>
 </html>
