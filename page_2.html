@@ -53,7 +53,7 @@
 
     /* Additional styles for the game */
     #game-container {
-      margin-top: -400px; /* Adjusted margin to move it up */
+      margin-top: 400px; /* Adjusted margin to move it up */
       text-align: center;
     }
 
@@ -88,7 +88,7 @@
 
   <script>
     // Add the game JavaScript code here
-    const secretNumber = Math.floor(Math.random() * 10) + 1;
+    const secretNumber = Math.floor(Math.random() * 2) + 1;
 
     function checkGuess() {
       const userGuess = parseInt(document.getElementById("userGuess").value);
