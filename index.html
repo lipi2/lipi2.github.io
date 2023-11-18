@@ -11,14 +11,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start; /* Align content at the top */
       height: 100vh; /* Set the body height to the full viewport height */
       margin: 0; /* Remove default margin */
+    }
+
+    h1, p {
+      align-self: flex-start; /* Align elements at the top */
     }
   </style>
 </head>
 <body>
   <h1>Hello, World!</h1>
-  <p>This is my first stylish web page.</p>
+  <p>This is my first web page.</p>
 </body>
 </html>
