@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: green;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -82,11 +82,25 @@
   <div id="game-container">
     <div id="red-square"></div>
     
+<style>
+  #red-square {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Ensure the red square is above other elements */
+  }
+</style>
+
 <script>
   const redSquare = document.getElementById("red-square");
   const initialSpeed = 5; // Initial speed
   let speed = initialSpeed;
-  let angle = 0; // Angle in radians for the direction of movement
+  let dx = 0; // Delta X for continuous movement
+  let dy = 0; // Delta Y for continuous movement
   let isMoving = false; // Flag to track if the square is already moving
 
   window.addEventListener("keydown", startMove);
@@ -98,16 +112,16 @@
 
       switch (event.key) {
         case "w":
-          angle = 0;
+          dy = -speed;
           break;
         case "a":
-          angle = Math.PI * 1.5;
+          dx = -speed;
           break;
         case "s":
-          angle = Math.PI;
+          dy = speed;
           break;
         case "d":
-          angle = Math.PI / 2;
+          dx = speed;
           break;
       }
 
@@ -118,14 +132,21 @@
 
   function stopMove(event) {
     isMoving = false;
+
+    switch (event.key) {
+      case "w":
+      case "s":
+        dy = 0;
+        break;
+      case "a":
+      case "d":
+        dx = 0;
+        break;
+    }
   }
 
   function moveRedSquare() {
-    const dx = speed * Math.cos(angle);
-    const dy = speed * Math.sin(angle);
-
-    redSquare.style.left = `${redSquare.offsetLeft + dx}px`;
-    redSquare.style.top = `${redSquare.offsetTop + dy}px`;
+    redSquare.style.transform = `translate(${dx}px, ${dy}px)`;
 
     // Continue continuous movement
     if (isMoving) {
