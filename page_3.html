@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -81,8 +81,7 @@
   <!-- Red Square Game -->
   <div id="game-container">
     <div id="red-square"></div>
-  </div>
-<script>
+script>
   const redSquare = document.getElementById("red-square");
   const initialSpeed = 5; // Initial speed
   let speed = initialSpeed;
@@ -96,24 +95,22 @@
   function startMove(event) {
     pressedKeys.add(event.key);
 
-    updateSpeed();
-
     // Start continuous movement
     requestAnimationFrame(moveRedSquare);
   }
 
   function stopMove(event) {
     pressedKeys.delete(event.key);
-
-    updateSpeed();
   }
 
   function updateSpeed() {
-    // Keep the speed constant
-    speed = initialSpeed;
+    // Keep the speed constant if keys are pressed, otherwise set to 0
+    speed = pressedKeys.size > 0 ? initialSpeed : 0;
   }
 
   function moveRedSquare() {
+    updateSpeed();
+
     const currentPosition = {
       left: parseInt(getComputedStyle(redSquare).left),
       top: parseInt(getComputedStyle(redSquare).top),
