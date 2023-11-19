@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: orange;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -95,7 +95,7 @@
   function startMove(event) {
     if (!isMoving) {
       isMoving = true;
-      animateRedSquare();
+      moveRedSquare(); // Call moveRedSquare directly
     }
 
     switch (event.key) {
@@ -127,7 +127,7 @@
     }
   }
 
-  function animateRedSquare() {
+  function moveRedSquare() {
     const currentPosition = {
       top: parseInt(getComputedStyle(redSquare).top),
       left: parseInt(getComputedStyle(redSquare).left)
@@ -137,12 +137,13 @@
     redSquare.style.left = `${currentPosition.left + direction.x * speed}px`;
 
     if (direction.x !== 0 || direction.y !== 0) {
-      requestAnimationFrame(animateRedSquare);
+      setTimeout(moveRedSquare, 16); // Use setTimeout for smoother movement
     } else {
       isMoving = false;
     }
   }
 </script>
+
 
   
 </body>
