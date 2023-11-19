@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: green;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -97,61 +97,53 @@
 
 <script>
   const redSquare = document.getElementById("red-square");
-  const initialSpeed = 5; // Initial speed
-  let speed = initialSpeed;
-  let dx = 0; // Delta X for continuous movement
-  let dy = 0; // Delta Y for continuous movement
-  let isMoving = false; // Flag to track if the square is already moving
+  const speed = 5; // Adjust the speed as needed
+  let direction = { x: 0, y: 0 };
 
   window.addEventListener("keydown", startMove);
   window.addEventListener("keyup", stopMove);
 
   function startMove(event) {
-    if (!isMoving) {
-      isMoving = true;
-
-      switch (event.key) {
-        case "w":
-          dy = -speed;
-          break;
-        case "a":
-          dx = -speed;
-          break;
-        case "s":
-          dy = speed;
-          break;
-        case "d":
-          dx = speed;
-          break;
-      }
-
-      // Start continuous movement
-      requestAnimationFrame(moveRedSquare);
+    switch (event.key) {
+      case "w":
+        direction.y = -1;
+        break;
+      case "a":
+        direction.x = -1;
+        break;
+      case "s":
+        direction.y = 1;
+        break;
+      case "d":
+        direction.x = 1;
+        break;
     }
+    requestAnimationFrame(moveRedSquare);
   }
 
   function stopMove(event) {
-    isMoving = false;
-
     switch (event.key) {
       case "w":
       case "s":
-        dy = 0;
+        direction.y = 0;
         break;
       case "a":
       case "d":
-        dx = 0;
+        direction.x = 0;
         break;
     }
   }
 
   function moveRedSquare() {
-    redSquare.style.transform = `translate(${dx}px, ${dy}px)`;
+    const currentPosition = {
+      top: parseInt(getComputedStyle(redSquare).top),
+      left: parseInt(getComputedStyle(redSquare).left)
+    };
 
-    // Continue continuous movement
-    if (isMoving) {
-      requestAnimationFrame(moveRedSquare);
-    }
+    redSquare.style.top = `${currentPosition.top + direction.y * speed}px`;
+    redSquare.style.left = `${currentPosition.left + direction.x * speed}px`;
+
+    requestAnimationFrame(moveRedSquare);
   }
 </script>
   
