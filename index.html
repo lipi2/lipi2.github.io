@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: purple;
+      color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -60,7 +60,7 @@
       top: -1408px; /* Adjust the position as needed */
       left: -275px;
       font-size: 16px; /* Adjust the font size as needed */
-      color: purple;
+      color: white;
     }
 
     h1, p {
@@ -87,7 +87,14 @@
   <img id="box_00" src="https://raw.githubusercontent.com/lipi2/text_box_01/main/lipi2_text_box_04.png" alt="This is text box 01">
 
    <!-- New Text with ID "newText" -->
-  <p id="newText">input test. </p>
+  <p id="newText" onclick="goToPage2()">input test. </p>
+
+  <script>
+    // JavaScript function to navigate to page 2
+    function goToPage2() {
+      window.location.href = "https://lipi2.github.io/page_2.html";
+    }
+  </script>
   
 </body>
 </html>
