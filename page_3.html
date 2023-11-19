@@ -84,62 +84,63 @@
   </div>
 
   <script>
-    const redSquare = document.getElementById("red-square");
-    const speed = 1; // Adjust the speed as needed
-    let dx = 0; // Delta X for continuous movement
-    let dy = 0; // Delta Y for continuous movement
+  const redSquare = document.getElementById("red-square");
+  const initialSpeed = 5; // Initial speed
+  let speed = initialSpeed;
+  let dx = 0; // Delta X for continuous movement
+  let dy = 0; // Delta Y for continuous movement
 
-    window.addEventListener("keydown", startMove);
-    window.addEventListener("keyup", stopMove);
+  window.addEventListener("keydown", startMove);
+  window.addEventListener("keyup", stopMove);
 
-    function startMove(event) {
-      switch (event.key) {
-        case "w":
-          dy = -speed;
-          break;
-        case "a":
-          dx = -speed;
-          break;
-        case "s":
-          dy = speed;
-          break;
-        case "d":
-          dx = speed;
-          break;
-      }
+  function startMove(event) {
+    switch (event.key) {
+      case "w":
+        dy = -speed;
+        break;
+      case "a":
+        dx = -speed;
+        break;
+      case "s":
+        dy = speed;
+        break;
+      case "d":
+        dx = speed;
+        break;
+    }
 
-      // Start continuous movement
+    // Start continuous movement
+    requestAnimationFrame(moveRedSquare);
+  }
+
+  function stopMove(event) {
+    switch (event.key) {
+      case "w":
+      case "s":
+        dy = 0;
+        break;
+      case "a":
+      case "d":
+        dx = 0;
+        break;
+    }
+  }
+
+  function moveRedSquare() {
+    const currentPosition = {
+      left: parseInt(getComputedStyle(redSquare).left),
+      top: parseInt(getComputedStyle(redSquare).top),
+    };
+
+    redSquare.style.left = `${currentPosition.left + dx}px`;
+    redSquare.style.top = `${currentPosition.top + dy}px`;
+
+    // Continue continuous movement
+    if (dx !== 0 || dy !== 0) {
       requestAnimationFrame(moveRedSquare);
     }
-
-    function stopMove(event) {
-      switch (event.key) {
-        case "w":
-        case "s":
-          dy = 0;
-          break;
-        case "a":
-        case "d":
-          dx = 0;
-          break;
-      }
-    }
-
-    function moveRedSquare() {
-      const currentPosition = {
-        left: parseInt(getComputedStyle(redSquare).left),
-        top: parseInt(getComputedStyle(redSquare).top)
-      };
-
-      redSquare.style.left = `${currentPosition.left + dx}px`;
-      redSquare.style.top = `${currentPosition.top + dy}px`;
-
-      // Continue continuous movement
-      if (dx !== 0 || dy !== 0) {
-        requestAnimationFrame(moveRedSquare);
-      }
-    }
-  </script>
+  }
+</script>
   
 </body>
 </html>
