@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: green;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -81,13 +81,14 @@
   <!-- Red Square Game -->
   <div id="game-container">
     <div id="red-square"></div>
-script>
+<script>
   const redSquare = document.getElementById("red-square");
   const initialSpeed = 5; // Initial speed
   let speed = initialSpeed;
   let dx = 0; // Delta X for continuous movement
   let dy = 0; // Delta Y for continuous movement
   let pressedKeys = new Set(); // Set to track pressed keys
+  let animationFrameId; // Variable to store the animation frame ID
 
   window.addEventListener("keydown", startMove);
   window.addEventListener("keyup", stopMove);
@@ -96,11 +97,19 @@ script>
     pressedKeys.add(event.key);
 
     // Start continuous movement
-    requestAnimationFrame(moveRedSquare);
+    if (!animationFrameId) {
+      animationFrameId = requestAnimationFrame(moveRedSquare);
+    }
   }
 
   function stopMove(event) {
     pressedKeys.delete(event.key);
+
+    // Stop continuous movement if no keys are pressed
+    if (pressedKeys.size === 0) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = undefined;
+    }
   }
 
   function updateSpeed() {
@@ -121,7 +130,7 @@ script>
 
     // Continue continuous movement
     if (pressedKeys.size > 0) {
-      requestAnimationFrame(moveRedSquare);
+      animationFrameId = requestAnimationFrame(moveRedSquare);
     }
   }
 </script>
