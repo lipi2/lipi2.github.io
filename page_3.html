@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: orange;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -135,13 +135,16 @@
       const currentTime = performance.now();
       const deltaTime = currentTime - startTime;
 
+      const distanceX = direction.x * speed * deltaTime / 1000;
+      const distanceY = direction.y * speed * deltaTime / 1000;
+
       const currentPosition = {
         top: parseInt(getComputedStyle(redSquare).top),
         left: parseInt(getComputedStyle(redSquare).left)
       };
 
-      redSquare.style.top = `${currentPosition.top + direction.y * speed * deltaTime / 1000}px`;
-      redSquare.style.left = `${currentPosition.left + direction.x * speed * deltaTime / 1000}px`;
+      redSquare.style.top = `${currentPosition.top + distanceY}px`;
+      redSquare.style.left = `${currentPosition.left + distanceX}px`;
 
       if (direction.x !== 0 || direction.y !== 0) {
         animationRequestId = requestAnimationFrame(update);
