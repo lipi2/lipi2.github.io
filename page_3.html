@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: white;
+      color: orange;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -86,32 +86,61 @@
   <script>
     const redSquare = document.getElementById("red-square");
     const speed = 5; // Adjust the speed as needed
+    let dx = 0; // Delta X for continuous movement
+    let dy = 0; // Delta Y for continuous movement
 
-    window.addEventListener("keydown", moveRedSquare);
+    window.addEventListener("keydown", startMove);
+    window.addEventListener("keyup", stopMove);
 
-    function moveRedSquare(event) {
-      const speed = 10; // Adjust the speed as needed
-      const currentPosition = {
-        top: parseInt(getComputedStyle(redSquare).top),
-        left: parseInt(getComputedStyle(redSquare).left)
-      };
-
+    function startMove(event) {
       switch (event.key) {
         case "w":
-          redSquare.style.top = `${currentPosition.top - speed}px`;
+          dy = -speed;
           break;
         case "a":
-          redSquare.style.left = `${currentPosition.left - speed}px`;
+          dx = -speed;
           break;
         case "s":
-          redSquare.style.top = `${currentPosition.top + speed}px`;
+          dy = speed;
           break;
         case "d":
-          redSquare.style.left = `${currentPosition.left + speed}px`;
+          dx = speed;
+          break;
+      }
+
+      // Start continuous movement
+      requestAnimationFrame(moveRedSquare);
+    }
+
+    function stopMove(event) {
+      switch (event.key) {
+        case "w":
+        case "s":
+          dy = 0;
+          break;
+        case "a":
+        case "d":
+          dx = 0;
           break;
       }
     }
+
+    function moveRedSquare() {
+      const currentPosition = {
+        left: parseInt(getComputedStyle(redSquare).left),
+        top: parseInt(getComputedStyle(redSquare).top)
+      };
+
+      redSquare.style.left = `${currentPosition.left + dx}px`;
+      redSquare.style.top = `${currentPosition.top + dy}px`;
+
+      // Continue continuous movement
+      if (dx !== 0 || dy !== 0) {
+        requestAnimationFrame(moveRedSquare);
+      }
+    }
   </script>
+  
 </body>
 </html>
 
