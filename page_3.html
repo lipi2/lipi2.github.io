@@ -7,51 +7,14 @@
   <style>
     body {
       background-color: black;
-      color: white;
+      color: green;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       height: 100vh;
       margin: 0;
       overflow: hidden; /* Hide overflow to prevent scrolling */
-    }
-
-    .text-container {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    img {
-      max-width: 100%;
-      max-height: 30vh;
-      margin-top: 120px;
-      margin-bottom: 20px;
-    }
-
-    #pilar {
-      position: relative;
-      top: -122px;
-      left: 400px;
-      transform: scale(5);
-    }
-
-    #pilar2 {
-      position: relative;
-      top: -545px;
-      left: -375px;
-      transform: scale(5);
-    }
-
-    #dro_logo {
-      position: relative;
-      top: -50px;
-    }
-
-    #game-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
     }
 
     #red-square {
@@ -64,53 +27,80 @@
       transform: translate(-50%, -50%);
       z-index: 1; /* Ensure the red square is above other elements */
     }
-
+    
+    #pilar, #pilar2, #dro_logo {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <div class="text-container">
-     <h1>Web page under construction.</h1>
-  </div>
-  <!-- Wrap the DRO logo within an anchor element -->
+  <!-- Red Square -->
+  <div id="red-square"></div>
+
+  <!-- Optionally, you can include other elements if needed -->
   <a href="https://lipi2.github.io/">
     <img id="dro_logo" src="https://raw.githubusercontent.com/lipi2/DRO_01/main/DRO_01.png" alt="DRO logo">
   </a>
   <img id="pilar" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
   <img id="pilar2" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
 
-  <!-- Red Square Game -->
-  <div id="game-container">
-    <div id="red-square"></div>
-  </div>
-
   <script>
     const redSquare = document.getElementById("red-square");
     const speed = 5; // Adjust the speed as needed
+    let dx = 0; // Delta X for continuous movement
+    let dy = 0; // Delta Y for continuous movement
 
-    window.addEventListener("keydown", moveRedSquare);
+    window.addEventListener("keydown", startMove);
+    window.addEventListener("keyup", stopMove);
 
-    function moveRedSquare(event) {
-      const speed = 10; // Adjust the speed as needed
-      const currentPosition = {
-        top: parseInt(getComputedStyle(redSquare).top),
-        left: parseInt(getComputedStyle(redSquare).left)
-      };
-
+    function startMove(event) {
       switch (event.key) {
         case "w":
-          redSquare.style.top = `${currentPosition.top - speed}px`;
+          dy = -speed;
           break;
         case "a":
-          redSquare.style.left = `${currentPosition.left - speed}px`;
+          dx = -speed;
           break;
         case "s":
-          redSquare.style.top = `${currentPosition.top + speed}px`;
+          dy = speed;
           break;
         case "d":
-          redSquare.style.left = `${currentPosition.left + speed}px`;
+          dx = speed;
           break;
+      }
+
+      // Start continuous movement
+      requestAnimationFrame(moveRedSquare);
+    }
+
+    function stopMove(event) {
+      switch (event.key) {
+        case "w":
+        case "s":
+          dy = 0;
+          break;
+        case "a":
+        case "d":
+          dx = 0;
+          break;
+      }
+    }
+
+    function moveRedSquare() {
+      const currentPosition = {
+        left: parseInt(getComputedStyle(redSquare).left),
+        top: parseInt(getComputedStyle(redSquare).top)
+      };
+
+      redSquare.style.left = `${currentPosition.left + dx}px`;
+      redSquare.style.top = `${currentPosition.top + dy}px`;
+
+      // Continue continuous movement
+      if (dx !== 0 || dy !== 0) {
+        requestAnimationFrame(moveRedSquare);
       }
     }
   </script>
 </body>
 </html>
+
