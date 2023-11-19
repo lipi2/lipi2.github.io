@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: green;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -121,16 +121,11 @@
   }
 
   function moveRedSquare() {
-    const currentPosition = {
-      left: parseInt(getComputedStyle(redSquare).left),
-      top: parseInt(getComputedStyle(redSquare).top),
-    };
-
     const dx = speed * Math.cos(angle);
     const dy = speed * Math.sin(angle);
 
-    redSquare.style.left = `${currentPosition.left + dx}px`;
-    redSquare.style.top = `${currentPosition.top + dy}px`;
+    redSquare.style.left = `${redSquare.offsetLeft + dx}px`;
+    redSquare.style.top = `${redSquare.offsetTop + dy}px`;
 
     // Continue continuous movement
     if (isMoving) {
