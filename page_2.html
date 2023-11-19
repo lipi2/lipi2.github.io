@@ -62,6 +62,12 @@
       margin-top: -200px;
       color: #ff6666; /* Red color for emphasis */
     }
+
+    /* Additional style for the correct answer (green) */
+  #result.correct {
+    color: #78f542;
+  }
+    
   </style>
 </head>
 <body>
@@ -88,25 +94,27 @@
   </div>
 
   <script>
-    // Add the game JavaScript code here
-    const secretNumber = Math.floor(Math.random() * 2) + 1;
+  // Add the game JavaScript code here
+  const secretNumber = Math.floor(Math.random() * 2) + 1;
 
-    function checkGuess() {
-      const userGuess = parseInt(document.getElementById("userGuess").value);
-      const resultElement = document.getElementById("result");
+  function checkGuess() {
+    const userGuess = parseInt(document.getElementById("userGuess").value);
+    const resultElement = document.getElementById("result");
 
-      if (userGuess === secretNumber) {
-        resultElement.innerText = "Congratulations! You guessed the correct number!";
-      } else {
-        resultElement.innerText = "Sorry, try again!";
-      }
-
-      // Reset the input field and result text after each attempt
-      document.getElementById("userGuess").value = "";
-      setTimeout(() => {
-        resultElement.innerText = "";
-      }, 5000); // Reset after 3 seconds (adjust as needed)
+    if (userGuess === secretNumber) {
+      resultElement.innerText = "Congratulations! You guessed the correct number!";
+      resultElement.classList.add("correct"); // Add the 'correct' class for green color
+    } else {
+      resultElement.innerText = "Sorry, try again!";
+      resultElement.classList.remove("correct"); // Remove 'correct' class if present
     }
-  </script>
+
+    // Reset the input field and result text after each attempt
+    document.getElementById("userGuess").value = "";
+    setTimeout(() => {
+      resultElement.innerText = "";
+    }, 3000); // Reset after 3 seconds (adjust as needed)
+  }
+</script>
 </body>
 </html>
