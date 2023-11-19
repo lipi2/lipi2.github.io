@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: green;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -86,8 +86,7 @@
   const redSquare = document.getElementById("red-square");
   const initialSpeed = 5; // Initial speed
   let speed = initialSpeed;
-  let dx = 0; // Delta X for continuous movement
-  let dy = 0; // Delta Y for continuous movement
+  let angle = 0; // Angle in radians for the direction of movement
   let isMoving = false; // Flag to track if the square is already moving
 
   window.addEventListener("keydown", startMove);
@@ -99,20 +98,16 @@
 
       switch (event.key) {
         case "w":
-          dy = -speed;
-          dx = 0;
+          angle = 0;
           break;
         case "a":
-          dx = -speed;
-          dy = 0;
+          angle = Math.PI * 1.5;
           break;
         case "s":
-          dy = speed;
-          dx = 0;
+          angle = Math.PI;
           break;
         case "d":
-          dx = speed;
-          dy = 0;
+          angle = Math.PI / 2;
           break;
       }
 
@@ -123,17 +118,6 @@
 
   function stopMove(event) {
     isMoving = false;
-
-    switch (event.key) {
-      case "w":
-      case "s":
-        dy = 0;
-        break;
-      case "a":
-      case "d":
-        dx = 0;
-        break;
-    }
   }
 
   function moveRedSquare() {
@@ -141,6 +125,9 @@
       left: parseInt(getComputedStyle(redSquare).left),
       top: parseInt(getComputedStyle(redSquare).top),
     };
+
+    const dx = speed * Math.cos(angle);
+    const dy = speed * Math.sin(angle);
 
     redSquare.style.left = `${currentPosition.left + dx}px`;
     redSquare.style.top = `${currentPosition.top + dy}px`;
