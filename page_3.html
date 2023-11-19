@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: white;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -83,37 +83,44 @@
     <div id="red-square"></div>
   </div>
 
-  <script>
+ <script>
   const redSquare = document.getElementById("red-square");
   const initialSpeed = 5; // Initial speed
   let speed = initialSpeed;
   let dx = 0; // Delta X for continuous movement
   let dy = 0; // Delta Y for continuous movement
+  let isMoving = false; // Flag to track if the square is already moving
 
   window.addEventListener("keydown", startMove);
   window.addEventListener("keyup", stopMove);
 
   function startMove(event) {
-    switch (event.key) {
-      case "w":
-        dy = -speed;
-        break;
-      case "a":
-        dx = -speed;
-        break;
-      case "s":
-        dy = speed;
-        break;
-      case "d":
-        dx = speed;
-        break;
-    }
+    if (!isMoving) {
+      isMoving = true;
 
-    // Start continuous movement
-    requestAnimationFrame(moveRedSquare);
+      switch (event.key) {
+        case "w":
+          dy = -speed;
+          break;
+        case "a":
+          dx = -speed;
+          break;
+        case "s":
+          dy = speed;
+          break;
+        case "d":
+          dx = speed;
+          break;
+      }
+
+      // Start continuous movement
+      requestAnimationFrame(moveRedSquare);
+    }
   }
 
   function stopMove(event) {
+    isMoving = false;
+
     switch (event.key) {
       case "w":
       case "s":
@@ -136,7 +143,7 @@
     redSquare.style.top = `${currentPosition.top + dy}px`;
 
     // Continue continuous movement
-    if (dx !== 0 || dy !== 0) {
+    if (isMoving) {
       requestAnimationFrame(moveRedSquare);
     }
   }
