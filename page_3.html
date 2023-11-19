@@ -54,25 +54,7 @@
     .logo-link {
       display: inline-block;
       margin-top: 20px;
-    }
-
-    /* Additional styles for the game */
-    #game-container {
-      margin-top: -600px; /* Adjusted margin to move it up */
-      text-align: center;
-    }
-
-    #result {
-      font-weight: bold;
-      margin-top: -200px;
-      color: #ff6666; /* Red color for emphasis */
-    }
-
-    /* Additional style for the correct answer (green) */
-  #result.correct {
-    color: #78f542;
-  }
-    
+    }    
   </style>
 </head>
 <body>
@@ -85,39 +67,6 @@
   </a>
   <img id="pilar" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
   <img id="pilar2" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
-
-  <!-- Game Section -->
-  <div id="game-container">
-    <h2>Simple Guessing Game</h2>
-    <p>Guess a number between 1 and 2:</p>
-    <input type="number" id="userGuess">
-    <button onclick="checkGuess()">Submit Guess</button>
-    <p id="result"></p>
-  </div>
-
-  <script>
-  // Add the game JavaScript code here
-  const secretNumber = Math.floor(Math.random() * 2) + 1;
-
-  function checkGuess() {
-    const userGuess = parseInt(document.getElementById("userGuess").value);
-    const resultElement = document.getElementById("result");
-
-    if (userGuess === secretNumber) {
-      resultElement.innerText = "Congratulations! You guessed the correct number!";
-      resultElement.classList.add("correct"); // Add the 'correct' class for green color
-    } else {
-      resultElement.innerText = "Sorry, try again!";
-      resultElement.classList.remove("correct"); // Remove 'correct' class if present
-    }
-
-    // Reset the input field and result text after each attempt
-    document.getElementById("userGuess").value = "";
-    setTimeout(() => {
-      resultElement.innerText = "";
-    }, 2000); // Reset after 3 seconds (adjust as needed)
-  }
-</script>
 </body>
 </html>
 
