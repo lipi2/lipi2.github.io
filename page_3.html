@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: green;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -81,45 +81,62 @@
   <!-- Red Square Game -->
   <div id="game-container">
     <div id="red-square"></div>
+    
 <script>
   const redSquare = document.getElementById("red-square");
   const initialSpeed = 5; // Initial speed
   let speed = initialSpeed;
   let dx = 0; // Delta X for continuous movement
   let dy = 0; // Delta Y for continuous movement
-  let pressedKeys = new Set(); // Set to track pressed keys
-  let animationFrameId; // Variable to store the animation frame ID
+  let isMoving = false; // Flag to track if the square is already moving
 
   window.addEventListener("keydown", startMove);
   window.addEventListener("keyup", stopMove);
 
   function startMove(event) {
-    pressedKeys.add(event.key);
+    if (!isMoving) {
+      isMoving = true;
 
-    // Start continuous movement
-    if (!animationFrameId) {
-      animationFrameId = requestAnimationFrame(moveRedSquare);
+      switch (event.key) {
+        case "w":
+          dy = -speed;
+          dx = 0;
+          break;
+        case "a":
+          dx = -speed;
+          dy = 0;
+          break;
+        case "s":
+          dy = speed;
+          dx = 0;
+          break;
+        case "d":
+          dx = speed;
+          dy = 0;
+          break;
+      }
+
+      // Start continuous movement
+      requestAnimationFrame(moveRedSquare);
     }
   }
 
   function stopMove(event) {
-    pressedKeys.delete(event.key);
+    isMoving = false;
 
-    // Stop continuous movement if no keys are pressed
-    if (pressedKeys.size === 0) {
-      cancelAnimationFrame(animationFrameId);
-      animationFrameId = undefined;
+    switch (event.key) {
+      case "w":
+      case "s":
+        dy = 0;
+        break;
+      case "a":
+      case "d":
+        dx = 0;
+        break;
     }
   }
 
-  function updateSpeed() {
-    // Keep the speed constant if keys are pressed, otherwise set to 0
-    speed = pressedKeys.size > 0 ? initialSpeed : 0;
-  }
-
   function moveRedSquare() {
-    updateSpeed();
-
     const currentPosition = {
       left: parseInt(getComputedStyle(redSquare).left),
       top: parseInt(getComputedStyle(redSquare).top),
@@ -129,8 +146,8 @@
     redSquare.style.top = `${currentPosition.top + dy}px`;
 
     // Continue continuous movement
-    if (pressedKeys.size > 0) {
-      animationFrameId = requestAnimationFrame(moveRedSquare);
+    if (isMoving) {
+      requestAnimationFrame(moveRedSquare);
     }
   }
 </script>
