@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: green;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -88,6 +88,7 @@
   const speed = 5; // Adjust the speed as needed
   let direction = { x: 0, y: 0 };
   let isMoving = false;
+  let animationRequestId;
 
   window.addEventListener("keydown", startMove);
   window.addEventListener("keyup", stopMove);
@@ -95,7 +96,7 @@
   function startMove(event) {
     if (!isMoving) {
       isMoving = true;
-      animateRedSquare();
+      animationRequestId = requestAnimationFrame(animateRedSquare);
     }
 
     switch (event.key) {
@@ -128,19 +129,28 @@
   }
 
   function animateRedSquare() {
-    const currentPosition = {
-      top: parseInt(getComputedStyle(redSquare).top),
-      left: parseInt(getComputedStyle(redSquare).left)
-    };
+    const startTime = performance.now();
 
-    redSquare.style.top = `${currentPosition.top + direction.y * speed}px`;
-    redSquare.style.left = `${currentPosition.left + direction.x * speed}px`;
+    function update() {
+      const currentTime = performance.now();
+      const deltaTime = currentTime - startTime;
 
-    if (direction.x !== 0 || direction.y !== 0) {
-      requestAnimationFrame(animateRedSquare);
-    } else {
-      isMoving = false;
+      const currentPosition = {
+        top: parseInt(getComputedStyle(redSquare).top),
+        left: parseInt(getComputedStyle(redSquare).left)
+      };
+
+      redSquare.style.top = `${currentPosition.top + direction.y * speed * deltaTime / 1000}px`;
+      redSquare.style.left = `${currentPosition.left + direction.x * speed * deltaTime / 1000}px`;
+
+      if (direction.x !== 0 || direction.y !== 0) {
+        animationRequestId = requestAnimationFrame(update);
+      } else {
+        isMoving = false;
+      }
     }
+
+    update();
   }
 </script>
   
