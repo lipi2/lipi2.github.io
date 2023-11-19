@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -82,55 +82,35 @@
   <div id="game-container">
     <div id="red-square"></div>
   </div>
-
- <script>
+<script>
   const redSquare = document.getElementById("red-square");
   const initialSpeed = 5; // Initial speed
   let speed = initialSpeed;
   let dx = 0; // Delta X for continuous movement
   let dy = 0; // Delta Y for continuous movement
-  let isMoving = false; // Flag to track if the square is already moving
+  let pressedKeys = new Set(); // Set to track pressed keys
 
   window.addEventListener("keydown", startMove);
   window.addEventListener("keyup", stopMove);
 
   function startMove(event) {
-    if (!isMoving) {
-      isMoving = true;
+    pressedKeys.add(event.key);
 
-      switch (event.key) {
-        case "w":
-          dy = -speed;
-          break;
-        case "a":
-          dx = -speed;
-          break;
-        case "s":
-          dy = speed;
-          break;
-        case "d":
-          dx = speed;
-          break;
-      }
+    updateSpeed();
 
-      // Start continuous movement
-      requestAnimationFrame(moveRedSquare);
-    }
+    // Start continuous movement
+    requestAnimationFrame(moveRedSquare);
   }
 
   function stopMove(event) {
-    isMoving = false;
+    pressedKeys.delete(event.key);
 
-    switch (event.key) {
-      case "w":
-      case "s":
-        dy = 0;
-        break;
-      case "a":
-      case "d":
-        dx = 0;
-        break;
-    }
+    updateSpeed();
+  }
+
+  function updateSpeed() {
+    // Keep the speed constant
+    speed = initialSpeed;
   }
 
   function moveRedSquare() {
@@ -143,7 +123,7 @@
     redSquare.style.top = `${currentPosition.top + dy}px`;
 
     // Continue continuous movement
-    if (isMoving) {
+    if (pressedKeys.size > 0) {
       requestAnimationFrame(moveRedSquare);
     }
   }
