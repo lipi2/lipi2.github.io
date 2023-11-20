@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: yellow;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -86,6 +86,8 @@
 <script>
   const redSquare = document.getElementById("red-square");
   const speed = 5; // Adjust the speed as needed
+  const frameRate = 60; // Frames per second
+  const frameInterval = 1000 / frameRate; // Time interval per frame in milliseconds
   let direction = { x: 0, y: 0 };
   let isMoving = false;
   let animationRequestId;
@@ -142,12 +144,13 @@
       const currentTime = performance.now();
       const deltaTime = currentTime - startTime;
 
-      const distanceX = direction.x * speed * deltaTime / 1000;
-      const distanceY = direction.y * speed * deltaTime / 1000;
+      // Calculate the distance based on constant speed and frame rate
+      const distanceX = (direction.x * speed * deltaTime) / frameInterval;
+      const distanceY = (direction.y * speed * deltaTime) / frameInterval;
 
       const currentPosition = {
         top: parseInt(getComputedStyle(redSquare).top),
-        left: parseInt(getComputedStyle(redSquare).left)
+        left: parseInt(getComputedStyle(redSquare).left),
       };
 
       redSquare.style.top = `${currentPosition.top + distanceY}px`;
