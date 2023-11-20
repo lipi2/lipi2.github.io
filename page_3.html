@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: orange;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -112,6 +112,13 @@
       case "d":
         direction.x = 1;
         break;
+    }
+
+    // Normalize the direction vector
+    const length = Math.sqrt(direction.x * direction.x + direction.y * direction.y);
+    if (length !== 0) {
+      direction.x /= length;
+      direction.y /= length;
     }
   }
 
