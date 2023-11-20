@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -128,28 +128,19 @@
   }
 
   function animateRedSquare() {
-    const startTime = performance.now();
+    const currentPosition = {
+      top: parseInt(getComputedStyle(redSquare).top),
+      left: parseInt(getComputedStyle(redSquare).left)
+    };
 
-    function update() {
-      const currentTime = performance.now();
-      const deltaTime = currentTime - startTime;
+    redSquare.style.top = `${currentPosition.top + direction.y * speed}px`;
+    redSquare.style.left = `${currentPosition.left + direction.x * speed}px`;
 
-      const currentPosition = {
-        top: parseInt(getComputedStyle(redSquare).top),
-        left: parseInt(getComputedStyle(redSquare).left)
-      };
-
-      redSquare.style.top = `${currentPosition.top + direction.y * speed * deltaTime / 1000}px`;
-      redSquare.style.left = `${currentPosition.left + direction.x * speed * deltaTime / 1000}px`;
-
-      if (direction.x !== 0 || direction.y !== 0) {
-        requestAnimationFrame(update);
-      } else {
-        isMoving = false;
-      }
+    if (direction.x !== 0 || direction.y !== 0) {
+      requestAnimationFrame(animateRedSquare);
+    } else {
+      isMoving = false;
     }
-
-    update();
   }
 </script>
    
