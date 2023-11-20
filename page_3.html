@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -87,17 +87,11 @@
   const redSquare = document.getElementById("red-square");
   const speed = 5; // Adjust the speed as needed
   let direction = { x: 0, y: 0 };
-  let isMoving = false;
 
   window.addEventListener("keydown", startMove);
   window.addEventListener("keyup", stopMove);
 
   function startMove(event) {
-    if (!isMoving) {
-      isMoving = true;
-      animateRedSquare();
-    }
-
     switch (event.key) {
       case "w":
         direction.y = -1;
@@ -140,17 +134,7 @@
     redSquare.style.top = `${currentPosition.top + direction.y * speed}px`;
     redSquare.style.left = `${currentPosition.left + direction.x * speed}px`;
   }
-
-  function animateRedSquare() {
-    if (direction.x !== 0 || direction.y !== 0) {
-      requestAnimationFrame(animateRedSquare);
-      updateRedSquarePosition();
-    } else {
-      isMoving = false;
-    }
-  }
 </script>
-
    
 </body>
 </html>
