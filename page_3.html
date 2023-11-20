@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -112,6 +112,8 @@
         direction.x = 1;
         break;
     }
+
+    updateRedSquarePosition();
   }
 
   function stopMove(event) {
@@ -125,9 +127,11 @@
         direction.x = 0;
         break;
     }
+
+    updateRedSquarePosition();
   }
 
-  function animateRedSquare() {
+  function updateRedSquarePosition() {
     const currentPosition = {
       top: parseInt(getComputedStyle(redSquare).top),
       left: parseInt(getComputedStyle(redSquare).left)
@@ -135,14 +139,18 @@
 
     redSquare.style.top = `${currentPosition.top + direction.y * speed}px`;
     redSquare.style.left = `${currentPosition.left + direction.x * speed}px`;
+  }
 
+  function animateRedSquare() {
     if (direction.x !== 0 || direction.y !== 0) {
       requestAnimationFrame(animateRedSquare);
+      updateRedSquarePosition();
     } else {
       isMoving = false;
     }
   }
 </script>
+
    
 </body>
 </html>
