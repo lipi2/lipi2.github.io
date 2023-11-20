@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: green;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -94,8 +94,8 @@
 
   function startMove(event) {
     if (!isMoving) {
-      isMoving = true;
       animateRedSquare();
+      isMoving = true;
     }
 
     switch (event.key) {
