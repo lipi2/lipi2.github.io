@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -85,8 +85,9 @@
   
 <script>
   const redSquare = document.getElementById("red-square");
-  const speed = 5; // Adjust the speed as needed
+  const speed = 0.1; // Adjust the speed as needed
   let direction = { x: 0, y: 0 };
+  let lastTimestamp;
 
   window.addEventListener("keydown", startMove);
   window.addEventListener("keyup", stopMove);
@@ -107,7 +108,10 @@
         break;
     }
 
-    animateRedSquare();
+    if (!lastTimestamp) {
+      lastTimestamp = performance.now();
+      animateRedSquare();
+    }
   }
 
   function stopMove(event) {
@@ -124,21 +128,24 @@
   }
 
   function animateRedSquare() {
-    function frame() {
-      const currentPosition = {
-        top: parseInt(getComputedStyle(redSquare).top),
-        left: parseInt(getComputedStyle(redSquare).left)
-      };
+    const timestamp = performance.now();
+    const elapsed = timestamp - lastTimestamp;
+    lastTimestamp = timestamp;
 
-      redSquare.style.top = `${currentPosition.top + direction.y * speed}px`;
-      redSquare.style.left = `${currentPosition.left + direction.x * speed}px`;
+    const distanceX = direction.x * speed * elapsed;
+    const distanceY = direction.y * speed * elapsed;
 
-      if (direction.x !== 0 || direction.y !== 0) {
-        requestAnimationFrame(frame);
-      }
+    const currentPosition = {
+      top: parseInt(getComputedStyle(redSquare).top),
+      left: parseInt(getComputedStyle(redSquare).left)
+    };
+
+    redSquare.style.top = `${currentPosition.top + distanceY}px`;
+    redSquare.style.left = `${currentPosition.left + distanceX}px`;
+
+    if (direction.x !== 0 || direction.y !== 0) {
+      requestAnimationFrame(animateRedSquare);
     }
-
-    frame();
   }
 </script>
    
