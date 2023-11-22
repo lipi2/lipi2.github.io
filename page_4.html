@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: green;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -37,6 +37,7 @@
       top: 0;
       left: 0;
       opacity: 0;
+      transition: opacity 0.5s ease-in-out; /* Adjust the duration as needed */
     }
 
     #newText {
@@ -87,8 +88,8 @@
     // Show the first chicken initially
     showNextChicken();
 
-    // Set interval to switch chickens every 1 second (adjust as needed)
-    setInterval(showNextChicken, 1000);
+    // Set interval to switch chickens every 0.5 seconds (adjust as needed)
+    setInterval(showNextChicken, 500);
 
     // JavaScript function to navigate to page 1
     function goToPage1() {
@@ -97,6 +98,3 @@
   </script>
 </body>
 </html>
-
-
-
