@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DRO menu</title>
+  <title>Chicken Animation</title>
   <style>
     body {
       background-color: black;
@@ -26,6 +26,13 @@
       max-height: 30vh;
       margin-top: 120px;
       margin-bottom: 20px;
+      /* Apply animation to images */
+      animation: chickenAnimation 10s infinite alternate ease-in-out;
+    }
+
+    @keyframes chickenAnimation {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
     #Dro_logo {
@@ -73,19 +80,19 @@
     <p>This is my first web page.</p>
   </div>
   
-  <img id="Dro_logo" src="https://raw.githubusercontent.com/lipi2/DRO_01/main/DRO_01.png" alt="DRO logo">
-  <img id="pilar" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
-  <img id="pilar2" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
+  <!-- Chicken Images -->
+  <img src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 1">
+  <img src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
+  <img src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
 
-   <!-- New Text with ID "newText" -->
+  <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
 
   <script>
-    // JavaScript function to navigate to page 2
+    // JavaScript function to navigate to page 1
     function goToPage1() {
       window.location.href = "https://lipi2.github.io";
     }
   </script>
-  
 </body>
 </html>
