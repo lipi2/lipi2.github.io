@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: #78f542;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -21,29 +21,18 @@
       margin-top: 20px;
     }
 
-    .chicken-container {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-    }
-
     .chicken {
       max-width: 100%;
       max-height: 30vh;
-      position: absolute;
-      animation: chickenAnimation 3s infinite steps(60);
+      margin-top: 120px;
+      margin-bottom: 20px;
       opacity: 0;
-    }
-
-    @keyframes chickenAnimation {
-      0%, 20%, 100% { opacity: 1; }
-      25%, 45% { opacity: 0; }
-      50%, 70% { opacity: 1; }
     }
 
     #newText {
       position: relative;
-      top: -120px; /* Adjust the position as needed */
+      top: -1208px; /* Adjust the position as needed */
+      left: -275px;
       font-size: 16px; /* Adjust the font size as needed */
       color: red;
       cursor: pointer; /* Set cursor to pointer on hover */
@@ -65,18 +54,30 @@
     <p>This is my first web page.</p>
   </div>
   
-  <!-- Chicken Container -->
-  <div class="chicken-container">
-    <!-- Chicken Images -->
-    <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_00.png" alt="Chicken 0">
-    <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 1">
-    <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
-  </div>
+  <!-- Chicken Images -->
+  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 1">
+  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
+  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
 
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
 
   <script>
+    let chickens = document.querySelectorAll('.chicken');
+    let index = 0;
+
+    function showNextChicken() {
+      chickens.forEach(chicken => chicken.style.opacity = 0);
+      chickens[index].style.opacity = 1;
+      index = (index + 1) % chickens.length;
+    }
+
+    // Show the first chicken initially
+    showNextChicken();
+
+    // Set interval to switch chickens every 1 second (adjust as needed)
+    setInterval(showNextChicken, 1000);
+
     // JavaScript function to navigate to page 1
     function goToPage1() {
       window.location.href = "https://lipi2.github.io";
@@ -84,4 +85,5 @@
   </script>
 </body>
 </html>
+
 
