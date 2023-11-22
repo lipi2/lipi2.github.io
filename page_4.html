@@ -23,20 +23,19 @@
 
     .chicken-container {
       position: relative;
+      width: 100%;
+      overflow: hidden;
     }
 
     .chicken {
       max-width: 100%;
       max-height: 30vh;
-      margin-bottom: 20px;
       position: absolute;
       animation: chickenAnimation 9s infinite linear;
     }
 
     @keyframes chickenAnimation {
-      0% { left: 0; }
-      33.33% { left: 33.33%; }
-      66.66% { left: 66.66%; }
+      0% { left: -100%; }
       100% { left: 100%; }
     }
 
