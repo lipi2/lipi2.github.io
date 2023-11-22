@@ -21,38 +21,23 @@
       margin-top: 20px;
     }
 
-    img {
+    .chicken-container {
+      position: relative;
+    }
+
+    .chicken {
       max-width: 100%;
       max-height: 30vh;
-      margin-top: 120px;
       margin-bottom: 20px;
-      /* Apply animation to images */
-      animation: chickenAnimation 10s infinite alternate ease-in-out;
+      position: absolute;
+      animation: chickenAnimation 9s infinite linear;
     }
 
     @keyframes chickenAnimation {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    #Dro_logo {
-      position: relative;
-      top: -100px;
-      transform: scale(1);
-    }
-
-    #pilar {
-      position: relative;
-      top: -122px;
-      left: 400px;
-      transform: scale(5);
-    }
-
-    #pilar2 {
-      position: relative;
-      top: -540px;
-      left: -375px;
-      transform: scale(5);
+      0% { left: 0; }
+      33.33% { left: 33.33%; }
+      66.66% { left: 66.66%; }
+      100% { left: 100%; }
     }
 
     #newText {
@@ -80,10 +65,13 @@
     <p>This is my first web page.</p>
   </div>
   
-  <!-- Chicken Images -->
-  <img src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 1">
-  <img src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
-  <img src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
+  <!-- Chicken Container -->
+  <div class="chicken-container">
+    <!-- Chicken Images -->
+    <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 1">
+    <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
+    <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
+  </div>
 
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
