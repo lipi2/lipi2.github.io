@@ -123,6 +123,7 @@
   let leftChickens = document.querySelectorAll('.left_chicken');
   let index = 0;
   let direction = 1; // 1 for moving right, -1 for moving left
+  let translateValue = 0;
 
   function showNextChicken() {
     chickens.forEach(chicken => chicken.style.opacity = 0);
@@ -139,7 +140,7 @@
 
   function moveChickens() {
     // Move the chicken using translate3d for smoother transition
-    let translateValue = direction * 8;
+    translateValue += direction * 8;
 
     if (direction === 1) {
       chickens.forEach(chicken => {
@@ -156,9 +157,9 @@
     // Check if the chicken has reached the maximum translation value or minimum (0)
     if (Math.abs(translateValue) >= 200) {
       direction = -direction; // Reverse the direction
+      translateValue = 0; // Reset translateValue
+      showNextChicken();
     }
-
-    showNextChicken();
   }
 
   // Set interval to switch chickens every 1 second (adjust as needed)
