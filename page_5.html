@@ -148,11 +148,12 @@
       chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
     } else {
       leftChickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-      leftChickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+      leftChickens[index].style.transform = `translate3d(${translateValue}px, 0, 0) scaleX(-1)`;
     }
 
     // Check if the chicken has reached the maximum translation value or minimum (0)
     if (translateValue >= maxTranslateValue || translateValue <= 0) {
+      translateValue = 0; // Reset translation value
       direction = -direction; // Reverse the direction
     }
 
