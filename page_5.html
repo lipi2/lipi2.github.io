@@ -35,15 +35,11 @@
 
     /* New class for left animation */
     .left_chicken {
-      max-width: 100%;
-      max-height: 30vh;
-      margin-top: 120px;
-      margin-bottom: 20px;
-      opacity: 0;
-      position: absolute;
-      top: 120px; /* Adjust the top position as needed */
-      transition: transform 0.5s ease-in-out;
       transform: scaleX(-1); /* Flip the image horizontally */
+    }
+
+    /* New class for left animation */
+    .left_chicken-left {
       animation: moveLeft 0.5s ease-in-out infinite alternate;
     }
 
@@ -122,48 +118,52 @@
   let chickens = document.querySelectorAll('.chicken');
   let leftChickens = document.querySelectorAll('.left_chicken');
   let index = 0;
-  let direction = 1; // 1 for moving right, -1 for moving left
   let translateValue = 0;
+  let speed = 8; // Adjust the speed as needed
+  const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
+  const maxTranslateValue = 200; // Maximum translation value
+  let direction = 1; // 1 for moving right, -1 for moving left
 
   function showNextChicken() {
-    chickens.forEach(chicken => chicken.style.opacity = 0);
-    leftChickens.forEach(leftChicken => leftChicken.style.opacity = 0);
+    chickens.forEach(chicken => {
+      chicken.style.opacity = 0;
+    });
+    leftChickens.forEach(leftChicken => {
+      leftChicken.style.opacity = 0;
+      leftChicken.classList.remove('left_chicken-left');
+    });
 
     if (direction === 1) {
       chickens[index].style.opacity = 1;
     } else {
       leftChickens[index].style.opacity = 1;
+      leftChickens[index].classList.add('left_chicken-left');
+    }
+
+    // Move the chicken using translate3d for smoother transition
+    translateValue += direction * speed;
+
+    if (direction === 1) {
+      chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+      chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+    } else {
+      leftChickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+      leftChickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+    }
+
+    // Check if the chicken has reached the maximum translation value or minimum (0)
+    if (translateValue >= maxTranslateValue || translateValue <= 0) {
+      direction = -direction; // Reverse the direction
     }
 
     index = (index + 1) % chickens.length;
   }
 
-  function moveChickens() {
-    // Move the chicken using translate3d for smoother transition
-    translateValue += direction * 8;
-
-    if (direction === 1) {
-      chickens.forEach(chicken => {
-        chicken.style.transition = `transform 0.5s ease-in-out`;
-        chicken.style.transform = `translate3d(${translateValue}px, 0, 0)`;
-      });
-    } else {
-      leftChickens.forEach(leftChicken => {
-        leftChicken.style.transition = `transform 0.5s ease-in-out`;
-        leftChicken.style.transform = `translate3d(${translateValue}px, 0, 0) scaleX(-1)`;
-      });
-    }
-
-    // Check if the chicken has reached the maximum translation value or minimum (0)
-    if (Math.abs(translateValue) >= 200) {
-      direction = -direction; // Reverse the direction
-      translateValue = 0; // Reset translateValue
-      showNextChicken();
-    }
-  }
+  // Show the first chicken initially
+  showNextChicken();
 
   // Set interval to switch chickens every 1 second (adjust as needed)
-  const intervalId = setInterval(moveChickens, 150);
+  const intervalId = setInterval(showNextChicken, 150);
 
   // JavaScript function to navigate to page 1
   function goToPage1() {
