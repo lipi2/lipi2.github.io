@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -85,6 +85,15 @@
       cursor: pointer; /* Set cursor to pointer on hover */
     }
 
+     #page5 {
+      position: relative;
+      top: -1280px; /* Adjust the position as needed */
+      left: -275px;
+      font-size: 15px; /* Adjust the font size as needed */
+      color:  #3CC224;
+      cursor: pointer; /* Set cursor to pointer on hover */
+    }
+
     h1, p {
       margin: 0;
     }
@@ -107,13 +116,16 @@
   <img id="box_00" src="https://raw.githubusercontent.com/lipi2/text_box_03/main/lipi2_text_box_05.png" alt="This is text box 00">
 
    <!-- New Text with ID "page2" -->
-  <p id="page2" onclick="goToPage2()">P1 </p>
+  <p id="page2" onclick="goToPage2()">A1 </p>
 
    <!-- New Text with ID "page3" -->
-  <p id="page3" onclick="goToPage3()">P2 </p>
+  <p id="page3" onclick="goToPage3()">A2 </p>
 
   <!-- New Text with ID "page4" -->
-  <p id="page4" onclick="goToPage4()">P3 </p>
+  <p id="page4" onclick="goToPage4()">A3 </p>
+
+  <!-- New Text with ID "page5" -->
+  <p id="page5" onclick="goToPage5()">A4 </p>
 
   <script>
     // JavaScript function to navigate to page 2
@@ -133,6 +145,13 @@
     // JavaScript function to navigate to page 4
     function goToPage4() {
       window.location.href = "https://lipi2.github.io/page_4.html";
+    }
+  </script>
+
+   <script>
+    // JavaScript function to navigate to page 5
+    function goToPage5() {
+      window.location.href = "https://lipi2.github.io/page_5.html";
     }
   </script>
   
