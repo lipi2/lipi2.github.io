@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -81,6 +81,11 @@
   <p id="newText" onclick="goToPage1()">BACK. </p>
  
  <script>
+
+I apologize for the confusion. Let's simplify the logic to ensure that when the chicken reaches 100 px, it switches direction and starts moving to the left without resetting. Here's the updated script:
+
+javascript
+Copy code
 let chickens = document.querySelectorAll('.chicken');
 let index = 0;
 let translateValue = 0;
@@ -92,14 +97,14 @@ function showNextChicken() {
   chickens.forEach(chicken => chicken.style.opacity = 0);
   chickens[index].style.opacity = 1;
 
-  // Move the chicken
-  translateValue += speed;
-
   // Check if the x-position of the chicken has reached the threshold
   if (translateValue >= thresholdX) {
-    // If yes, move the chicken to the left
-    translateValue = -thresholdX;
+    // If yes, switch direction and move the chicken to the left
+    translateValue = -translateValue; // Invert the current position
   }
+
+  // Move the chicken based on the direction
+  translateValue += speed;
 
   chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
   chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
