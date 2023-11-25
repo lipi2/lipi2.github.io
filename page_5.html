@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -86,34 +86,12 @@
   let translateValue = 0;
   const speed = 1; // Adjust the speed as needed
 
-  window.addEventListener("keydown", startMove);
-  window.addEventListener("keyup", stopMove);
-
-  function startMove(event) {
-    // Handle key events to control the chicken's movement
-    switch (event.key) {
-      case "ArrowRight":
-        translateValue += speed;
-        break;
-      // Add more cases for other keys if needed
-    }
-  }
-
-  function stopMove(event) {
-    // Handle key events to stop the chicken's movement
-    switch (event.key) {
-      case "ArrowRight":
-        // You might want to add additional logic here
-        break;
-      // Add more cases for other keys if needed
-    }
-  }
-
   function updateChickenAnimation() {
     chickens.forEach(chicken => chicken.style.opacity = 0);
     chickens[index].style.opacity = 1;
 
     // Move the chicken to the right using translate3d for smoother transition
+    translateValue += speed;
     chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
     index = (index + 1) % chickens.length;
@@ -124,6 +102,5 @@
   updateChickenAnimation(); // Start the animation loop
 </script>
 
-  
 </body>
 </html>
