@@ -101,8 +101,9 @@
   let chickens = document.querySelectorAll('.chicken');
   let index = 0;
   let translateValue = 0;
-  let speed = 8; // Adjust the speed as needed
+  let speed = 2; // Adjust the speed as needed
   const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
+  const maxTranslateValue = 200; // Maximum translation value
 
   function showNextChicken() {
     chickens.forEach(chicken => {
@@ -118,7 +119,7 @@
     chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
     // Check if the chicken has reached the maximum translation value
-    if (translateValue >= window.innerWidth) {
+    if (translateValue >= maxTranslateValue) {
       translateValue = 0;
       chickens[index].classList.add('chicken-left');
     }
@@ -140,4 +141,3 @@
 
 </body>
 </html>
-
