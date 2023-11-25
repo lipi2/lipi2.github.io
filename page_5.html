@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -93,15 +93,15 @@
     chickens.forEach(chicken => chicken.style.opacity = 0);
     chickens[index].style.opacity = 1;
 
-    // Check if the chicken has reached the maximum translation value or minimum (0)
-    if (translateValue >= maxTranslateValue || translateValue <= 0) {
-      direction = -direction; // Reverse the direction
-    }
-
     // Move the chicken using translate3d for smoother transition
     translateValue += direction * speed;
     chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
     chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+    // Check if the chicken has reached the maximum translation value or minimum (0)
+    if (translateValue >= maxTranslateValue || translateValue <= 0) {
+      direction = -direction; // Reverse the direction
+    }
 
     index = (index + 1) % chickens.length;
   }
@@ -117,6 +117,7 @@
     window.location.href = "https://lipi2.github.io";
   }
 </script>
+
   
 </body>
 </html>
