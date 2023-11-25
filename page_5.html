@@ -142,12 +142,16 @@
 
       if (direction === 1) {
         chickens.forEach(chicken => {
+          chicken.style.transition = `transform 0.5s ease-in-out`;
           chicken.style.transform = `translate3d(${translateValue}px, 0, 0)`;
         });
+        leftChickens.forEach(leftChicken => leftChicken.style.transition = 'none');
       } else {
         leftChickens.forEach(leftChicken => {
+          leftChicken.style.transition = `transform 0.5s ease-in-out`;
           leftChicken.style.transform = `translate3d(${-translateValue}px, 0, 0) scaleX(-1)`;
         });
+        chickens.forEach(chicken => chicken.style.transition = 'none');
       }
 
       // Check if the chicken has reached the maximum translation value or minimum (0)
