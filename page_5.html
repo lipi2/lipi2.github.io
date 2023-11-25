@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -84,21 +84,22 @@
   let chickens = document.querySelectorAll('.chicken');
   let index = 0;
   let translateValue = 0;
-  const speed = 8; // Adjust the speed as needed
+  let speed = 8; // Adjust the speed as needed
   const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
   const maxTranslateValue = 200; // Maximum translation value
+  let direction = 1; // 1 for moving right, -1 for moving left
 
   function showNextChicken() {
     chickens.forEach(chicken => chicken.style.opacity = 0);
     chickens[index].style.opacity = 1;
 
-    // Check if the chicken has reached the maximum translation value
+    // Check if the chicken has reached the maximum translation value or minimum (0)
     if (translateValue >= maxTranslateValue || translateValue <= 0) {
-      speed = -speed; // Reverse the direction
+      direction = -direction; // Reverse the direction
     }
 
     // Move the chicken using translate3d for smoother transition
-    translateValue += speed;
+    translateValue += direction * speed;
     chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
     chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
@@ -116,6 +117,6 @@
     window.location.href = "https://lipi2.github.io";
   }
 </script>
-
+  
 </body>
 </html>
