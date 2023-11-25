@@ -29,24 +29,7 @@
       opacity: 0;
       position: absolute;
       top: 120px; /* Adjust the top position as needed */
-      transition: transform 0.5s ease-in-out;
     }
-
-    /* New class for left animation */
-    .chicken-left {
-      animation: moveLeft 0.5s ease-in-out infinite alternate;
-    }
-
-    /* Keyframes for left animation */
-    @keyframes moveLeft {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-20px); /* Adjust the distance as needed */
-      }
-    }
-
     #newText {
       position: relative;
       top: -1800px; /* Adjust the position as needed */
@@ -101,27 +84,23 @@
   let chickens = document.querySelectorAll('.chicken');
   let index = 0;
   let translateValue = 0;
-  let speed = 2; // Adjust the speed as needed
+  let speed = 8; // Adjust the speed as needed
   const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
   const maxTranslateValue = 200; // Maximum translation value
+  let direction = 1; // 1 for moving right, -1 for moving left
 
   function showNextChicken() {
-    chickens.forEach(chicken => {
-      chicken.style.opacity = 0;
-      chicken.classList.remove('chicken-left');
-    });
-
+    chickens.forEach(chicken => chicken.style.opacity = 0);
     chickens[index].style.opacity = 1;
 
     // Move the chicken using translate3d for smoother transition
-    translateValue += speed;
+    translateValue += direction * speed;
     chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
     chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
-    // Check if the chicken has reached the maximum translation value
-    if (translateValue >= maxTranslateValue) {
-      translateValue = 0;
-      chickens[index].classList.add('chicken-left');
+    // Check if the chicken has reached the maximum translation value or minimum (0)
+    if (translateValue >= maxTranslateValue || translateValue <= 0) {
+      direction = -direction; // Reverse the direction
     }
 
     index = (index + 1) % chickens.length;
@@ -139,5 +118,6 @@
   }
 </script>
 
+  
 </body>
 </html>
