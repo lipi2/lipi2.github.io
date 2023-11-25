@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -93,7 +93,7 @@
   <!-- Chicken Images -->
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 1">
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
-  <img class="chicken chicken-left" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
+  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
  
@@ -118,13 +118,13 @@
     // Check if the chicken has reached the maximum translation value or minimum (0)
     if (translateValue >= maxTranslateValue || translateValue <= 0) {
       direction = -direction; // Reverse the direction
-    }
 
-    // Add or remove the left animation class based on the direction
-    if (direction === -1) {
-      chickens[index].classList.add('chicken-left');
-    } else {
-      chickens[index].classList.remove('chicken-left');
+      // Add or remove the left animation class based on the direction
+      if (direction === -1) {
+        chickens[index].classList.add('chicken-left');
+      } else {
+        chickens[index].classList.remove('chicken-left');
+      }
     }
 
     index = (index + 1) % chickens.length;
@@ -144,4 +144,3 @@
 
 </body>
 </html>
-
