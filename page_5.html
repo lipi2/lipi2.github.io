@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -97,12 +97,13 @@
       translateValue += speed;
       chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
       chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+      index = (index + 1) % chickens.length;
     }
 
     // Check if the maximum translation value is reached
     if (translateValue < maxTranslateValue) {
        translateValue -= speed;
-    index = (index + 1) % chickens.length;
+  
   }
 
   // Show the first chicken initially
