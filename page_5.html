@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -81,7 +81,7 @@
   <p id="newText" onclick="goToPage1()">BACK. </p>
  
  <script>
-   let chickens = document.querySelectorAll('.chicken');
+let chickens = document.querySelectorAll('.chicken');
 let index = 0;
 let translateValue = 0;
 const speed = 8; // Adjust the speed as needed
@@ -92,23 +92,17 @@ function showNextChicken() {
   chickens.forEach(chicken => chicken.style.opacity = 0);
   chickens[index].style.opacity = 1;
 
+  // Move the chicken to the right
+  translateValue += speed;
+
   // Check if the x-position of the chicken has reached the threshold
   if (translateValue >= thresholdX) {
     // If yes, move the chicken to the left
     translateValue -= speed;
-  } else {
-    // If not, move the chicken to the right
-    translateValue += speed;
   }
 
   chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
   chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
-
-  // Check if the x-position is less than or equal to 0
-  // If yes, reset the x-position to create a continuous effect
-  if (translateValue <= 0) {
-    translateValue = 0;
-  }
 
   index = (index + 1) % chickens.length;
 }
