@@ -21,6 +21,7 @@
       text-align: center;
       margin-top: 20px;
     }
+
     .chicken, .left_chicken {
       max-width: 100%;
       max-height: 30vh;
@@ -30,6 +31,11 @@
       position: absolute;
       top: 120px; /* Adjust the top position as needed */
       transition: transform 0.5s ease-in-out;
+    }
+
+    /* New class for left animation */
+    .left_chicken {
+      transform: scaleX(-1); /* Flip the image horizontally */
     }
 
     /* New class for left animation */
@@ -55,26 +61,31 @@
       color: red;
       cursor: pointer; /* Set cursor to pointer on hover */
     }
+
     #Dro_logo {
       position: relative;
       top: -163px;
       transform: scale(0.20);
     }
-     #pilar {
+
+    #pilar {
       position: relative;
       top: -450px;
       left: 400px;
       transform: scale(1.5);
     }
-      #pilar2 {
+
+    #pilar2 {
       position: relative;
       top: -1350px;
       left: -375px;
       transform: scale(1.5);
     }
+
     h1, p {
       margin: 0;
     }
+
     .logo-link {
       display: inline-block;
       margin-top: 20px;
@@ -95,7 +106,7 @@
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
 
-   <!--left Chicken Images -->
+  <!-- Left Chicken Images -->
   <img class="left_chicken" src="https://raw.githubusercontent.com/lipi2/Left_chicken/main/LEFT_chicken_01.png" alt="Left Chicken 1">
   <img class="left_chicken" src="https://raw.githubusercontent.com/lipi2/Left_chicken/main/LEFT_chicken_02.png" alt="Left Chicken 2">
   <img class="left_chicken" src="https://raw.githubusercontent.com/lipi2/Left_chicken/main/LEFT_chicken_03.png" alt="Left Chicken 3">  
@@ -116,22 +127,36 @@
   function showNextChicken() {
     chickens.forEach(chicken => {
       chicken.style.opacity = 0;
-      chicken.classList.remove('left_chicken-left');
+    });
+    leftChickens.forEach(leftChicken => {
+      leftChicken.style.opacity = 0;
+      leftChicken.classList.remove('left_chicken-left');
     });
 
-    leftChickens[index].style.opacity = 1;
+    if (direction === 1) {
+      chickens[index].style.opacity = 1;
+    } else {
+      leftChickens[index].style.opacity = 1;
+      leftChickens[index].classList.add('left_chicken-left');
+    }
 
     // Move the chicken using translate3d for smoother transition
     translateValue += direction * speed;
-    leftChickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-    leftChickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+    if (direction === 1) {
+      chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+      chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+    } else {
+      leftChickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+      leftChickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+    }
 
     // Check if the chicken has reached the maximum translation value or minimum (0)
     if (translateValue >= maxTranslateValue || translateValue <= 0) {
       direction = -direction; // Reverse the direction
     }
 
-    index = (index + 1) % leftChickens.length;
+    index = (index + 1) % chickens.length;
   }
 
   // Show the first chicken initially
