@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -17,6 +17,11 @@
       overflow: hidden;
     }
 
+    .text-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
     .chicken, .left_chicken {
       max-width: 100%;
       max-height: 30vh;
@@ -30,6 +35,14 @@
 
     /* New class for left animation */
     .left_chicken {
+      max-width: 100%;
+      max-height: 30vh;
+      margin-top: 120px;
+      margin-bottom: 20px;
+      opacity: 0;
+      position: absolute;
+      top: 120px; /* Adjust the top position as needed */
+      transition: transform 0.5s ease-in-out;
       transform: scaleX(-1); /* Flip the image horizontally */
       animation: moveLeft 0.5s ease-in-out infinite alternate;
     }
@@ -40,7 +53,7 @@
         transform: translateX(0);
       }
       to {
-        transform: translateX(-200px); /* Adjust the distance as needed */
+        transform: translateX(-20px); /* Adjust the distance as needed */
       }
     }
 
@@ -53,12 +66,45 @@
       cursor: pointer; /* Set cursor to pointer on hover */
     }
 
+    #Dro_logo {
+      position: relative;
+      top: -163px;
+      transform: scale(0.20);
+    }
+
+    #pilar {
+      position: relative;
+      top: -450px;
+      left: 400px;
+      transform: scale(1.5);
+    }
+
+    #pilar2 {
+      position: relative;
+      top: -1350px;
+      left: -375px;
+      transform: scale(1.5);
+    }
+
     h1, p {
       margin: 0;
+    }
+
+    .logo-link {
+      display: inline-block;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
+  <div class="text-container">
+    <h1>Web page under construction.</h1>
+    <p>This is my first web page.</p>
+  </div>
+  <img id="Dro_logo" src="https://raw.githubusercontent.com/lipi2/DRO_01/main/DRO_01.png" alt="DRO logo">
+  <img id="pilar" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
+  <img id="pilar2" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
+  
   <!-- Chicken Images -->
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 1">
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
@@ -72,7 +118,7 @@
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
  
- <script>
+<script>
   let chickens = document.querySelectorAll('.chicken');
   let leftChickens = document.querySelectorAll('.left_chicken');
   let index = 0;
@@ -101,13 +147,11 @@
         chicken.style.transition = `transform 0.5s ease-in-out`;
         chicken.style.transform = `translate3d(${translateValue}px, 0, 0)`;
       });
-      leftChickens.forEach(leftChicken => leftChicken.style.transition = 'none');
     } else {
       leftChickens.forEach(leftChicken => {
         leftChicken.style.transition = `transform 0.5s ease-in-out`;
-        leftChicken.style.transform = `translate3d(${-translateValue}px, 0, 0) scaleX(-1)`;
+        leftChicken.style.transform = `translate3d(${translateValue}px, 0, 0) scaleX(-1)`;
       });
-      chickens.forEach(chicken => chicken.style.transition = 'none');
     }
 
     // Check if the chicken has reached the maximum translation value or minimum (0)
@@ -126,6 +170,6 @@
     window.location.href = "https://lipi2.github.io";
   }
 </script>
-  
+
 </body>
 </html>
