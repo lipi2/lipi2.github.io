@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -92,17 +92,20 @@ function showNextChicken() {
   chickens.forEach(chicken => chicken.style.opacity = 0);
   chickens[index].style.opacity = 1;
 
+  // Move the chicken to the right
+  translateValue += speed;
+
   // Check if the x-position of the chicken has reached the threshold
   if (translateValue >= thresholdX) {
-    // If yes, reset the x-position and move to the left
+    // If yes, move the chicken to the left
+    chickens[index].style.transition = 'none'; // Remove transition for instant change
     translateValue = -speed;
-    chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
-  } else {
-    // If not, move the chicken to the right
-    translateValue += speed;
-    chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-    chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
   }
+
+  chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+  // Restore transition for subsequent movements
+  chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
 
   index = (index + 1) % chickens.length;
 }
