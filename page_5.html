@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -98,7 +98,7 @@ function showNextChicken() {
   // Check if the x-position of the chicken has reached the threshold
   if (translateValue >= thresholdX) {
     // If yes, move the chicken to the left
-    translateValue = -speed;
+    translateValue = -thresholdX;
   }
 
   chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
@@ -117,7 +117,6 @@ setInterval(showNextChicken, 150);
 function goToPage1() {
   window.location.href = "https://lipi2.github.io";
 }
-
  
 </script>
 
