@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -164,8 +164,20 @@ function showNextChicken() {
 
         // Check if the chicken has reached the maximum translation value
         if (translateValue >= maxTranslateValue) {
-            // Remove the chicken from the DOM
-            chickens[index].style.display = 'none';
+            // Bring the chicken back by resetting the display property
+            chickens[index].style.display = 'block';
+
+            // Reset translation and transition properties
+            translateValue = 0;
+            chickens[index].style.transition = '';
+            chickens[index].style.transform = '';
+
+            // Also bring back chicken_left if it was hidden
+            chickens_left.forEach(chicken_left => {
+                chicken_left.style.display = 'block';
+                chicken_left.style.opacity = 0;
+            });
+
             clearInterval(intervalId); // Stop the interval
         }
     } else {
