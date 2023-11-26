@@ -110,6 +110,7 @@
   const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
   const maxTranslateValue = 200; // Maximum translation value
   let direction = 1; // 1 for moving right, -1 for moving left
+   
 
 
   function showNextChicken_left() {
@@ -117,8 +118,6 @@
       chickens_left[index].style.opacity = 1;
       index = (index + 1) % chickens_left.length;
 
-      // Move the chicken using translate3d for smoother transition
-      translateValue += direction * speed;
    
     }
     // Show the first chicken initially
