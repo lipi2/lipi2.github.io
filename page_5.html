@@ -129,7 +129,6 @@
     let speed_left = 8; // Adjust the speed as needed
     const maxTranslateValue_left = -200; // Maximum translation value for left movement
     let direction_left = -1; // -1 for moving left
-    let chickens_leftHidden = true; // Flag to check if chickens_left are hidden
 
     function showNextChicken_left() {
       chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
@@ -149,8 +148,6 @@
           clearInterval(intervalId_left); // Stop the interval
           // Reset translateValue_left for future appearance
           translateValue_left = 0;
-          // Reset the flag to hide chickens_left
-          chickens_leftHidden = true;
         }
       } else {
         // Continue moving the chicken
@@ -181,16 +178,13 @@
         // Check if the chicken has reached the maximum translation value
         if (translateValue >= maxTranslateValue) {
           // Remove the chicken from the DOM
-          chickens[index].style.opacity = 0;
+          chickens[index].style.display = 'none';
           clearInterval(intervalId); // Stop the interval
 
           // Make left chickens visible when right chickens reach maxTranslateValue
-          if (chickens_leftHidden) {
-            chickens_left.forEach(chicken_left => {
-              chicken_left.style.opacity = 1;
-            });
-            chickens_leftHidden = false;
-          }
+          chickens_left.forEach(chicken_left => {
+            chicken_left.style.opacity = 1;
+          });
         }
       } else {
         // Continue moving the chicken
@@ -216,3 +210,4 @@
 </body>
 
 </html>
+
