@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -118,6 +118,7 @@
   let speed_left = 8; // Adjust the speed as needed
   const maxTranslateValue_left = -200; // Maximum translation value for left movement
   let direction_left = -1; // -1 for moving left
+  let chickens_leftHidden = true; // Flag to check if chickens_left are hidden
 
   function showNextChicken_left() {
     chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
@@ -135,6 +136,11 @@
         // Remove the chicken from the DOM
         chickens_left[index_left].style.display = 'none';
         clearInterval(intervalId_left); // Stop the interval
+
+        // Reset translateValue_left for future appearance
+        translateValue_left = 0;
+        // Reset the flag to hide chickens_left
+        chickens_leftHidden = true;
       }
     } else {
       // Continue moving the chicken
@@ -145,7 +151,9 @@
     index_left = (index_left + 1) % chickens_left.length;
   }
 
-  // Show the first chicken initially
+  // Hide left chickens initially
+  chickens_left.forEach(chicken_left => chicken_left.style.display = 'none');
+
   // Set interval to switch chickens every 1 second (adjust as needed)
   const intervalId_left = setInterval(showNextChicken_left, 150);
 
@@ -167,10 +175,13 @@
         clearInterval(intervalId); // Stop the interval
 
         // Make left chickens visible when right chickens reach maxTranslateValue
-        chickens_left.forEach(chicken_left => {
-          chicken_left.style.display = 'block';
-          chicken_left.style.opacity = 1;
-        });
+        if (chickens_leftHidden) {
+          chickens_left.forEach(chicken_left => {
+            chicken_left.style.display = 'block';
+            chicken_left.style.opacity = 1;
+          });
+          chickens_leftHidden = false;
+        }
       }
     } else {
       // Continue moving the chicken
