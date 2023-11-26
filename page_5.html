@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -101,30 +101,55 @@
   <p id="newText" onclick="goToPage1()">BACK. </p>
  
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .chicken_left {
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-    </style>
-    <title>Chicken Animation</title>
-</head>
-<body>
-
 <script>
-// Chickens
-let chickens = document.querySelectorAll('.chicken, .chicken_left');
+// Right chicken
+let chickens = document.querySelectorAll('.chicken');
 let index = 0;
 let translateValue = 0;
 let speed = 8; // Adjust the speed as needed
 const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
 const maxTranslateValue = 600; // Maximum translation value
 let direction = 1; // 1 for moving right, -1 for moving left
+
+// Left chicken
+let chickens_left = document.querySelectorAll('.chicken_left');
+let index_left = 0;
+let translateValue_left = 0;
+let speed_left = 8; // Adjust the speed as needed
+const maxTranslateValue_left = -200; // Maximum translation value for left movement
+let direction_left = -1; // -1 for moving left
+
+function showNextChicken_left() {
+    chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
+    chickens_left[index_left].style.opacity = 1;
+
+    // Move the chicken using translate3d for smoother transition
+    translateValue_left += direction_left * speed_left;
+
+    // Check if the chicken has reached the maximum translation value or minimum (0)
+    if (translateValue_left <= maxTranslateValue_left || translateValue_left >= 0) {
+        direction_left = -direction_left; // Reverse the direction
+
+        // Check if the chicken has reached the maximum translation value
+        if (translateValue_left <= maxTranslateValue_left) {
+            // Remove the chicken from the DOM
+            chickens_left[index_left].style.display = 'none';
+            clearInterval(intervalId_left); // Stop the interval
+        }
+    } else {
+        // Continue moving the chicken
+        chickens_left[index_left].style.transition = `transform ${transitionDuration}s ease-in-out`;
+        chickens_left[index_left].style.transform = `translate3d(${translateValue_left}px, 0, 0)`;
+    }
+
+    index_left = (index_left + 1) % chickens_left.length;
+}
+
+// Show the first chicken initially
+showNextChicken_left();
+
+// Set interval to switch chickens every 1 second (adjust as needed)
+const intervalId_left = setInterval(showNextChicken_left, 150);
 
 function showNextChicken() {
     chickens.forEach(chicken => chicken.style.opacity = 0);
@@ -134,15 +159,15 @@ function showNextChicken() {
     translateValue += direction * speed;
 
     // Check if the chicken has reached the maximum translation value or minimum (0)
-    if (translateValue >= maxTranslateValue) {
-        // Hide the current chicken
-        chickens[index].style.display = 'none';
+    if (translateValue >= maxTranslateValue || translateValue <= 0) {
+        direction = -direction; // Reverse the direction
 
-        // Show the left-moving chicken
-        let index_left = (index % 2 === 0) ? index + 1 : index;
-        chickens[index_left].style.transition = `transform ${transitionDuration}s ease-in-out, opacity 0.5s ease-in-out`;
-        chickens[index_left].style.transform = 'translate3d(-200px, 0, 0)';
-        chickens[index_left].style.opacity = 1;
+        // Check if the chicken has reached the maximum translation value
+        if (translateValue >= maxTranslateValue) {
+            // Remove the chicken from the DOM
+            chickens[index].style.display = 'none';
+            clearInterval(intervalId); // Stop the interval
+        }
     } else {
         // Continue moving the chicken
         chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
@@ -152,6 +177,9 @@ function showNextChicken() {
     index = (index + 1) % chickens.length;
 }
 
+// Show the first chicken initially
+showNextChicken();
+
 // Set interval to switch chickens every 1 second (adjust as needed)
 const intervalId = setInterval(showNextChicken, 150);
 
@@ -159,11 +187,8 @@ const intervalId = setInterval(showNextChicken, 150);
 function goToPage1() {
     window.location.href = "https://lipi2.github.io";
 }
+ 
 </script>
-
-</body>
-</html>
-
 
 
 </body>
