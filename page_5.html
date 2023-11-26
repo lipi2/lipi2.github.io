@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -134,7 +134,7 @@
       // Check if the chicken has reached the maximum translation value
       if (translateValue_left <= maxTranslateValue_left) {
         // Remove the chicken from the DOM
-        chickens_left[index_left].style.display = 'none';
+        chickens_left[index_left].style.opacity = 0;
         clearInterval(intervalId_left); // Stop the interval
 
         // Reset translateValue_left for future appearance
@@ -150,9 +150,6 @@
 
     index_left = (index_left + 1) % chickens_left.length;
   }
-
-  // Hide left chickens initially
-  chickens_left.forEach(chicken_left => chicken_left.style.display = 'none');
 
   // Set interval to switch chickens every 1 second (adjust as needed)
   const intervalId_left = setInterval(showNextChicken_left, 150);
@@ -171,13 +168,12 @@
       // Check if the chicken has reached the maximum translation value
       if (translateValue >= maxTranslateValue) {
         // Remove the chicken from the DOM
-        chickens[index].style.display = 'none';
+        chickens[index].style.opacity = 0;
         clearInterval(intervalId); // Stop the interval
 
         // Make left chickens visible when right chickens reach maxTranslateValue
         if (chickens_leftHidden) {
           chickens_left.forEach(chicken_left => {
-            chicken_left.style.display = 'block';
             chicken_left.style.opacity = 1;
           });
           chickens_leftHidden = false;
