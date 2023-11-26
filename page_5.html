@@ -8,7 +8,7 @@
     <style>
         body {
             background-color: black;
-            color: red;
+            color: blue;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -28,10 +28,10 @@
             max-height: 30vh;
             margin-top: 120px;
             margin-bottom: 20px;
-            left: 0; /* Adjusted the left position */
+            left: 0;
             opacity: 1;
             position: absolute;
-            top: 120px; /* Adjusted the top position */
+            top: 120px;
             transform: translate3d(0, 0, 0);
         }
 
@@ -40,9 +40,11 @@
             max-height: 30vh;
             margin-top: 120px;
             margin-bottom: 20px;
-            opacity: 1;
+            left: 0;
+            opacity: 0; /* Initially set to be invisible */
             position: absolute;
             top: 120px;
+            transform: translate3d(0, 0, 0);
         }
 
         #newText {
@@ -111,9 +113,7 @@
     <!-- New Text with ID "newText" -->
     <p id="newText" onclick="goToPage1()">BACK. </p>
 
-
     <script>
-        // Right chicken
         let chickens = document.querySelectorAll('.chicken');
         let index = 0;
         let translateValue = 0;
@@ -122,7 +122,6 @@
         const maxTranslateValue = 600;
         let direction = 1;
 
-        // Left chicken
         let chickens_left = document.querySelectorAll('.chicken_left');
         let index_left = 0;
         let translateValue_left = 0;
@@ -140,7 +139,7 @@
                 direction_left = -direction_left;
 
                 if (translateValue_left <= maxTranslateValue_left) {
-                    chickens_left[index_left].style.display = 'none';
+                    chickens_left[index_left].style.opacity = 0;
                     clearInterval(intervalId_left);
                 }
             } else {
@@ -167,7 +166,6 @@
                     chickens[index].style.transform = '';
 
                     chickens_left.forEach(chicken_left => {
-                        chicken_left.style.display = 'block';
                         chicken_left.style.opacity = 0;
                     });
 
@@ -180,6 +178,11 @@
 
             index = (index + 1) % chickens.length;
         }
+
+        // Initially hide left chickens
+        chickens_left.forEach(chicken_left => {
+            chicken_left.style.display = 'none';
+        });
 
         showNextChicken_left();
         const intervalId_left = setInterval(showNextChicken_left, 150);
@@ -194,3 +197,4 @@
 </body>
 
 </html>
+
