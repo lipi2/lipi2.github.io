@@ -121,7 +121,7 @@ let direction_left = -1; // -1 for moving left
 
 function showNextChicken_left() {
     chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
-    chickens_left[index_left].style.opacity = 1;
+    chickens_left[index_left].style.opacity = 0;
 
     // Move the chicken using translate3d for smoother transition
     translateValue_left += direction_left * speed_left;
@@ -129,7 +129,7 @@ function showNextChicken_left() {
     // Check if the chicken has reached the maximum translation value or minimum (0)
     if (translateValue_left <= maxTranslateValue_left || translateValue_left >= 0) {
         direction_left = -direction_left; // Reverse the direction
-        // chickens_left[index_left].style.opacity = 1;
+        chickens_left[index_left].style.opacity = 1;
 
         // Check if the chicken has reached the maximum translation value
         if (translateValue_left <= maxTranslateValue_left) {
