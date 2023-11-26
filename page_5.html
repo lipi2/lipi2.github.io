@@ -116,6 +116,10 @@
       chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
       chickens_left[index].style.opacity = 1;
       index = (index + 1) % chickens_left.length;
+
+      // Move the chicken using translate3d for smoother transition
+      translateValue += direction * speed;
+   
     }
     // Show the first chicken initially
     showNextChicken_left();
