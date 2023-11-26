@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -127,8 +127,11 @@ function showNextChicken_left() {
     translateValue_left += direction_left * speed_left;
 
     // Check if the chicken has reached the maximum translation value or minimum (0)
+    // pas capable enlever sa sans faire buger
     if (translateValue_left <= maxTranslateValue_left || translateValue_left >= 0) {
         direction_left = -direction_left; // Reverse the direction
+         chickens_left[index_left].style.display = 'none';
+          clearInterval(intervalId_left); // Stop the interval
 
         // Check if the chicken has reached the maximum translation value
         if (translateValue_left <= maxTranslateValue_left) {
