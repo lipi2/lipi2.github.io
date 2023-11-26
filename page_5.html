@@ -116,24 +116,25 @@ let chickens_left = document.querySelectorAll('.chicken_left');
 let index_left = 0;
 let translateValue_left = 0;
 let speed_left = 8; // Adjust the speed as needed
-const maxTranslateValue_left = -2000; // Maximum translation value for left movement
+const maxTranslateValue_left = -200; // Maximum translation value for left movement
 let direction_left = -1; // -1 for moving left
 
 function showNextChicken_left() {
     chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
-    chickens_left[index_left].style.opacity = 0;
+    chickens_left[index_left].style.opacity = 1;
 
     // Move the chicken using translate3d for smoother transition
     translateValue_left += direction_left * speed_left;
-        
+
+    // Check if the chicken has reached the maximum translation value or minimum (0)
+    if (translateValue_left <= maxTranslateValue_left || translateValue_left >= 0) {
+        direction_left = -direction_left; // Reverse the direction
+
         // Check if the chicken has reached the maximum translation value
         if (translateValue_left <= maxTranslateValue_left) {
             // Remove the chicken from the DOM
             chickens_left[index_left].style.display = 'none';
             clearInterval(intervalId_left); // Stop the interval
-
-            chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
-            chickens_left[index_left].style.opacity = 1;
         }
     } else {
         // Continue moving the chicken
