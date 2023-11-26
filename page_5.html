@@ -131,7 +131,6 @@
 
         function showNextChicken_left() {
             chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
-            chickens_left[index_left].style.opacity = 1;
 
             translateValue_left += direction_left * speed_left;
 
@@ -145,6 +144,7 @@
             } else {
                 chickens_left[index_left].style.transition = `transform ${transitionDuration}s ease-in-out`;
                 chickens_left[index_left].style.transform = `translate3d(${translateValue_left}px, 0, 0)`;
+                chickens_left[index_left].style.opacity = 1; // Make the left chicken visible
             }
 
             index_left = (index_left + 1) % chickens_left.length;
@@ -152,7 +152,6 @@
 
         function showNextChicken() {
             chickens.forEach(chicken => chicken.style.opacity = 0);
-            chickens[index].style.opacity = 1;
 
             translateValue += direction * speed;
 
@@ -197,4 +196,5 @@
 </body>
 
 </html>
+
 
