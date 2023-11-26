@@ -8,7 +8,7 @@
     <style>
         body {
             background-color: black;
-            color: blue;
+            color: red;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -45,6 +45,7 @@
             position: absolute;
             top: 120px;
             transform: translate3d(0, 0, 0);
+            display: none; /* Initially hide left chickens */
         }
 
         #newText {
@@ -166,6 +167,7 @@
 
                     chickens_left.forEach(chicken_left => {
                         chicken_left.style.opacity = 0;
+                        chicken_left.style.display = 'none'; // Hide left chickens
                     });
 
                     clearInterval(intervalId);
@@ -177,11 +179,6 @@
 
             index = (index + 1) % chickens.length;
         }
-
-        // Initially hide left chickens
-        chickens_left.forEach(chicken_left => {
-            chicken_left.style.display = 'none';
-        });
 
         showNextChicken_left();
         const intervalId_left = setInterval(showNextChicken_left, 150);
