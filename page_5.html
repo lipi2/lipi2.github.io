@@ -111,10 +111,18 @@
   const maxTranslateValue = 200; // Maximum translation value
   let direction = 1; // 1 for moving right, -1 for moving left
 
-  
- 
- 
 
+  function showNextChicken_left() {
+      chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
+      chickens_left[index].style.opacity = 1;
+      index = (index + 1) % chickens_left.length;
+    }
+    // Show the first chicken initially
+    showNextChicken_left();
+    // Set interval to switch chickens every 1 second (adjust as needed)
+    setInterval(showNextChicken_left, 100);
+   
+   
   function showNextChicken() {
     chickens.forEach(chicken => chicken.style.opacity = 0);
     chickens[index].style.opacity = 1;
