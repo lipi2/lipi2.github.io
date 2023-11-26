@@ -180,11 +180,6 @@
           // Remove the chicken from the DOM
           chickens[index].style.display = 'none';
           clearInterval(intervalId); // Stop the interval
-
-          // Make left chickens visible when right chickens reach maxTranslateValue
-          chickens_left.forEach(chicken_left => {
-            chicken_left.style.opacity = 1;
-          });
         }
       } else {
         // Continue moving the chicken
