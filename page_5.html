@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -26,9 +26,10 @@
       max-height: 30vh;
       margin-top: 120px;
       margin-bottom: 20px;
-      opacity: 0;
+      opacity: 1;
       position: absolute;
       top: 120px; /* Adjust the top position as needed */
+      transform: translate3d(0, 0, 0); /* Set initial transform */
     }
     #newText {
       position: relative;
@@ -80,53 +81,42 @@
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
  
-<style>
-  .chicken {
-    max-width: 100%;
-    max-height: 30vh;
-    margin-top: 120px;
-    margin-bottom: 20px;
-    opacity: 1; /* Set initial opacity to 1 */
-    position: absolute;
-    top: 120px; /* Adjust the top position as needed */
-  }
-</style>
 
 <script>
-  let chickens = document.querySelectorAll('.chicken');
-  let translateValue = 0;
-  let speed = 8; // Adjust the speed as needed
-  const maxTranslateValue = 200; // Maximum translation value
-  const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
+    let chickens = document.querySelectorAll('.chicken');
+    let translateValue = 0;
+    let speed = 8; // Adjust the speed as needed
+    const maxTranslateValue = 200; // Maximum translation value
+    const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
 
-  function showNextChicken() {
-    // Move the chicken using translate3d for smoother transition
-    translateValue += speed;
+    function showNextChicken() {
+      // Move the chicken using translate3d for smoother transition
+      translateValue += speed;
 
-    // Check if any chicken has reached the maximum translation value
-    if (translateValue >= maxTranslateValue) {
-      // Set opacity to 0 for all chickens
+      // Check if any chicken has reached the maximum translation value
+      if (translateValue >= maxTranslateValue) {
+        // Set opacity to 0 for all chickens
+        chickens.forEach(chicken => {
+          chicken.style.transition = `opacity ${transitionDuration}s ease-in-out`;
+          chicken.style.opacity = 0;
+        });
+      }
+
+      // Update the transform for all chickens
       chickens.forEach(chicken => {
-        chicken.style.transition = `opacity ${transitionDuration}s ease-in-out`;
-        chicken.style.opacity = 0;
+        chicken.style.transition = `transform ${transitionDuration}s ease-in-out`;
+        chicken.style.transform = `translate3d(${translateValue}px, 0, 0)`;
       });
     }
 
-    // Update the transform for all chickens
-    chickens.forEach(chicken => {
-      chicken.style.transition = `transform ${transitionDuration}s ease-in-out`;
-      chicken.style.transform = `translate3d(${translateValue}px, 0, 0)`;
-    });
-  }
+    // Set interval to switch chickens every 150 milliseconds (adjust as needed)
+    const intervalId = setInterval(showNextChicken, 150);
 
-  // Set interval to switch chickens every 1 second (adjust as needed)
-  const intervalId = setInterval(showNextChicken, 150);
-
-  // JavaScript function to navigate to page 1
-  function goToPage1() {
-    window.location.href = "https://lipi2.github.io";
-  }
-</script>
+    // JavaScript function to navigate to page 1
+    function goToPage1() {
+      window.location.href = "https://lipi2.github.io";
+    }
+  </script>
 
 
 </body>
