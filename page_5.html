@@ -8,7 +8,7 @@
     <style>
         body {
             background-color: black;
-            color: blue;
+            color: green;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -113,87 +113,85 @@
     <!-- New Text with ID "newText" -->
     <p id="newText" onclick="goToPage1()">BACK. </p>
 
-    <script>
-        let chickens = document.querySelectorAll('.chicken');
-        let index = 0;
-        let translateValue = 0;
-        let speed = 8;
-        const transitionDuration = 0.5;
-        const maxTranslateValue = 600;
-        let direction = 1;
+  <script>
+    let chickens = document.querySelectorAll('.chicken');
+    let index = 0;
+    let translateValue = 0;
+    let speed = 8;
+    const transitionDuration = 0.5;
+    const maxTranslateValue = 600;
+    let direction = 1;
 
-        let chickens_left = document.querySelectorAll('.chicken_left');
-        let index_left = 0;
-        let translateValue_left = 0;
-        let speed_left = 8;
-        const maxTranslateValue_left = -200;
-        let direction_left = -1;
+    let chickens_left = document.querySelectorAll('.chicken_left');
+    let index_left = 0;
+    let translateValue_left = 0;
+    let speed_left = 8;
+    const maxTranslateValue_left = -200;
+    let direction_left = -1;
 
-        function showNextChicken_left() {
-            chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
-            chickens_left[index_left].style.opacity = 1;
+    function showNextChicken_left() {
+        chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
 
-            translateValue_left += direction_left * speed_left;
+        translateValue_left += direction_left * speed_left;
 
-            if (translateValue_left <= maxTranslateValue_left || translateValue_left >= 0) {
-                direction_left = -direction_left;
+        if (translateValue_left <= maxTranslateValue_left || translateValue_left >= 0) {
+            direction_left = -direction_left;
 
-                if (translateValue_left <= maxTranslateValue_left) {
-                    chickens_left[index_left].style.opacity = 0;
-                    clearInterval(intervalId_left);
-                }
-            } else {
-                chickens_left[index_left].style.transition = `transform ${transitionDuration}s ease-in-out`;
-                chickens_left[index_left].style.transform = `translate3d(${translateValue_left}px, 0, 0)`;
+            if (translateValue_left <= maxTranslateValue_left) {
+                chickens_left[index_left].style.opacity = 0;
+                clearInterval(intervalId_left);
             }
-
-            index_left = (index_left + 1) % chickens_left.length;
+        } else {
+            chickens_left[index_left].style.transition = `transform ${transitionDuration}s ease-in-out`;
+            chickens_left[index_left].style.transform = `translate3d(${translateValue_left}px, 0, 0)`;
+            chickens_left[index_left].style.opacity = 1; // Make the left chicken visible
         }
 
-        function showNextChicken() {
-            chickens.forEach(chicken => chicken.style.opacity = 0);
-            chickens[index].style.opacity = 1;
+        index_left = (index_left + 1) % chickens_left.length;
+    }
 
-            translateValue += direction * speed;
+    function showNextChicken() {
+        chickens.forEach(chicken => chicken.style.opacity = 0);
 
-            if (translateValue >= maxTranslateValue || translateValue <= 0) {
-                direction = -direction;
+        translateValue += direction * speed;
 
-                if (translateValue >= maxTranslateValue) {
-                    chickens[index].style.display = 'block';
-                    translateValue = 0;
-                    chickens[index].style.transition = '';
-                    chickens[index].style.transform = '';
+        if (translateValue >= maxTranslateValue || translateValue <= 0) {
+            direction = -direction;
 
-                    chickens_left.forEach(chicken_left => {
-                        chicken_left.style.opacity = 0;
-                    });
+            if (translateValue >= maxTranslateValue) {
+                chickens[index].style.display = 'block';
+                translateValue = 0;
+                chickens[index].style.transition = '';
+                chickens[index].style.transform = '';
 
-                    clearInterval(intervalId);
-                }
-            } else {
-                chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-                chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+                // Reset styles for left chickens
+                chickens_left.forEach(chicken_left => {
+                    chicken_left.style.opacity = 0;
+                    chicken_left.style.transition = '';
+                    chicken_left.style.transform = '';
+                });
+
+                clearInterval(intervalId);
             }
-
-            index = (index + 1) % chickens.length;
+        } else {
+            chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
         }
 
-        // Initially hide left chickens
-        chickens_left.forEach(chicken_left => {
-            chicken_left.style.display = 'none';
-        });
+        index = (index + 1) % chickens.length;
+    }
 
-        showNextChicken_left();
-        const intervalId_left = setInterval(showNextChicken_left, 150);
+    showNextChicken_left();
+    const intervalId_left = setInterval(showNextChicken_left, 150);
 
-        showNextChicken();
-        const intervalId = setInterval(showNextChicken, 150);
+    showNextChicken();
+    const intervalId = setInterval(showNextChicken, 150);
 
-        function goToPage1() {
-            window.location.href = "https://lipi2.github.io";
-        }
-    </script>
+    function goToPage1() {
+        window.location.href = "https://lipi2.github.io";
+    }
+</script>
+
 </body>
 
 </html>
