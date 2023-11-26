@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -121,7 +121,7 @@ let direction_left = -1; // -1 for moving left
 
 function showNextChicken_left() {
     chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
-    chickens_left[index_left].style.opacity = 1;
+    chickens_left[index_left].style.opacity = 0;
 
     // Move the chicken using translate3d for smoother transition
     translateValue_left += direction_left * speed_left;
