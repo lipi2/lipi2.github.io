@@ -8,7 +8,7 @@
     <style>
         body {
             background-color: black;
-            color: red;
+            color: green;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -164,13 +164,15 @@
                     translateValue = 0;
                     chickens[index].style.transition = '';
                     chickens[index].style.transform = '';
-
+                
                     chickens_left.forEach(chicken_left => {
                         chicken_left.style.opacity = 0;
+                        chicken_left.style.transition = '';
+                        chicken_left.style.transform = '';
                     });
 
-                    clearInterval(intervalId);
-                }
+    clearInterval(intervalId);
+}
             } else {
                 chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
                 chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
