@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -120,25 +120,16 @@ const maxTranslateValue_left = -200; // Maximum translation value for left movem
 let direction_left = -1; // -1 for moving left
 
 function showNextChicken_left() {
-    chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
-    chickens_left[index_left].style.opacity = 0;
+    chickens_left.forEach(chicken_left => chicken_left.style.opacity = 1);
 
     // Move the chicken using translate3d for smoother transition
     translateValue_left += direction_left * speed_left;
 
-    // Check if the chicken has reached the maximum translation value or minimum (0)
-    if (translateValue_left <= maxTranslateValue_left) {
-        // Remove the chicken from the DOM
-        chickens_left[index_left].style.display = 'none';
-        clearInterval(intervalId_left); // Stop the interval
-        // Reset opacity to 1
-        chickens_left[index_left].style.opacity = 1;
-    } else {
-        // Continue moving the chicken
+    // Check if the right-moving chicken has reached the maximum translation value
+    if (translateValue >= maxTranslateValue) {
+        // Show the left-moving chicken
         chickens_left[index_left].style.transition = `transform ${transitionDuration}s ease-in-out`;
         chickens_left[index_left].style.transform = `translate3d(${translateValue_left}px, 0, 0)`;
-
-        // Reset opacity to 1
         chickens_left[index_left].style.opacity = 1;
     }
 
@@ -157,9 +148,14 @@ function showNextChicken() {
 
     // Check if the chicken has reached the maximum translation value or minimum (0)
     if (translateValue >= maxTranslateValue) {
-        // Remove the chicken from the DOM
+        // Remove the right-moving chicken from the DOM
         chickens[index].style.display = 'none';
         clearInterval(intervalId); // Stop the interval
+
+        // Show the left-moving chicken
+        const intervalId_left_show = setInterval(() => {
+            showNextChicken_left();
+        }, 150);
     } else {
         // Continue moving the chicken
         chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
