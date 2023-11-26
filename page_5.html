@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -91,19 +91,20 @@
   let direction = 1; // 1 for moving right, -1 for moving left
 
   function showNextChicken() {
-    chickens.forEach(chicken => chicken.style.opacity = 0);
+    chickens.forEach(chicken => chicken.style.opacity = 1); // Reset opacity to 1 for all chickens
 
     // Move the chicken using translate3d for smoother transition
     translateValue += direction * speed;
-    chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out, opacity ${transitionDuration}s ease-in-out`;
+    chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
     chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
     // Set opacity based on translateValue
-    if (translateValue >= maxTranslateValue || translateValue <= minTranslateValue) {
-      chickens[index].style.opacity = 0; // Set opacity to 0 when chicken reaches max or min
-      direction *= -1; // Change direction to move in the opposite direction
-    } else {
-      chickens[index].style.opacity = 1; // Set opacity to 1 when chicken is within the range
+    if (translateValue >= maxTranslateValue) {
+      chickens[index].style.opacity = 0; // Set opacity to 0 when chicken reaches 200x
+      direction = -1; // Change direction to move in the opposite direction
+    } else if (translateValue <= minTranslateValue) {
+      chickens[index].style.opacity = 1; // Set opacity to 1 when chicken reaches -200x
+      direction = 1; // Change direction to move in the opposite direction
     }
 
     index = (index + 1) % chickens.length;
@@ -121,6 +122,5 @@
   }
 </script>
 
-  
 </body>
 </html>
