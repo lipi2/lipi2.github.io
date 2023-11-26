@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -121,7 +121,7 @@ let direction_left = -1; // -1 for moving left
 
 function showNextChicken_left() {
     chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
-    chickens_left[index_left].style.opacity = 1;
+    chickens_left[index_left].style.opacity = 0;
 
     // Move the chicken using translate3d for smoother transition
     translateValue_left += direction_left * speed_left;
@@ -136,6 +136,7 @@ function showNextChicken_left() {
             // Remove the chicken from the DOM
             chickens_left[index_left].style.display = 'none';
             clearInterval(intervalId_left); // Stop the interval
+            chickens_left[index_left].style.opacity = 0;
         }
     } else {
         // Continue moving the chicken
@@ -148,8 +149,6 @@ function showNextChicken_left() {
 
 // Show the first chicken initially
 showNextChicken_left();
-  chickens_left[index_left].style.display = 'none';
-  clearInterval(intervalId_left); // Stop the interval
 
 // Set interval to switch chickens every 1 second (adjust as needed)
 const intervalId_left = setInterval(showNextChicken_left, 150);
