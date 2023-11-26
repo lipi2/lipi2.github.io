@@ -8,6 +8,8 @@
             opacity: 0;
             transition: opacity 0.5s ease-in-out, transform 3s linear;
             position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
     </style>
     <title>Chicken Animation</title>
@@ -25,18 +27,18 @@ let direction = 1; // 1 for moving right, -1 for moving left
 
 function animateChicken(chicken) {
     // Set initial position
-    chicken.style.transform = `translateX(${direction === 1 ? '-' : ''}100%)`;
+    chicken.style.transform = `translateX(${direction === 1 ? '-' : ''}50%)`;
     chicken.style.opacity = 1;
 
     // Move the chicken
     setTimeout(() => {
-        chicken.style.transform = `translateX(${direction === 1 ? '-' : ''}${distance * direction}px)`;
+        chicken.style.transform = `translateX(${direction === 1 ? '-' : ''}${50 + distance * direction}%)`;
     }, 100);
 
     // Hide the chicken and reset position
     setTimeout(() => {
         chicken.style.opacity = 0;
-        chicken.style.transform = `translateX(${direction === 1 ? '' : '-'}100%)`;
+        chicken.style.transform = `translateX(${direction === 1 ? '' : '-'}50%)`;
     }, 3100);
 }
 
@@ -54,3 +56,5 @@ function goToPage1() {
 
 </body>
 </html>
+
+
