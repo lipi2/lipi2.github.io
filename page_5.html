@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -129,10 +129,10 @@ let direction = 1; // 1 for moving right, -1 for moving left
 // Left chicken
 let chickens_left = document.querySelectorAll('.chicken_left');
 let index_left = 0;
-let translateValue_left = 0;
+let translateValue_left = -200; // Initial position outside the viewport
 let speed_left = 8; // Adjust the speed as needed
-const maxTranslateValue_left = -200; // Maximum translation value for left movement
-let direction_left = -1; // -1 for moving left
+const maxTranslateValue_left = 0; // Maximum translation value for left movement
+let direction_left = 1; // 1 for moving right
 
 function showNextChicken_left() {
     // Move the chicken using translate3d for smoother transition
@@ -142,7 +142,7 @@ function showNextChicken_left() {
     if (translateValue >= maxTranslateValue) {
         // Show the left-moving chicken
         chickens_left[index_left].style.opacity = 1;
-        chickens_left[index_left].style.transition = `transform ${transitionDuration}s ease-in-out`;
+        chickens_left[index_left].style.transition = `transform ${transitionDuration}s ease-in-out, opacity 0.5s ease-in-out`;
         chickens_left[index_left].style.transform = `translate3d(${translateValue_left}px, 0, 0)`;
     }
 
