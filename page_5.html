@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -105,13 +105,17 @@
 
         if (translateValue >= maxTranslateValue) {
             // If the chicken reaches the maximum translation value, reset to the original location
-            translateValue = 0;
             chickens[index].style.transition = 'none'; // Disable transition for the reset
+            chickens[index].style.display = 'none'; // Hide the chicken briefly
+            translateValue = 0;
             chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
             chickens[index].style.left = '500px'; // Reset left property
             chickens[index].style.top = '120px'; // Reset top property
+
+            // Use setTimeout to show the chicken after a short delay
             setTimeout(() => {
                 chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+                chickens[index].style.display = 'block'; // Show the chicken again
                 showNextChicken(); // Continue with the next chicken
             }, 10); // Adjust the delay as needed
         } else {
