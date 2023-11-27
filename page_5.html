@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -77,64 +77,45 @@
   <img id="pilar2" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
   
   <!-- Chicken Images -->
-  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 2">
+  <!-- Removed the first chicken -->
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
 
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
-<script>
+
+  <script>
     // Right chicken
-    let container = document.getElementById('chicken-container'); // assuming there is a container element
+    let chickens = document.querySelectorAll('.chicken');
     let index = 0;
+    let translateValue = 0;
     let speed = 8; // Adjust the speed as needed
     const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
     const maxTranslateValue = 600; // Maximum translation value
     let direction = 1; // 1 for moving right, -1 for moving left
 
-    function createChicken() {
-        let chicken = document.createElement('div');
-        chicken.classList.add('chicken');
-        container.appendChild(chicken);
-        return chicken;
-    }
-
     function showNextChicken() {
-        let chickens = document.querySelectorAll('.chicken');
         chickens.forEach(chicken => chicken.style.opacity = 0);
-        
-        let currentChicken = chickens[index];
-        currentChicken.style.opacity = 1;
-
-        if (direction === 1 && index === 0) {
-            // If moving right and the first chicken is reached, reset the position
-            chickens.forEach(chicken => {
-                chicken.remove(); // Remove the existing chicken element
-                let newChicken = createChicken(); // Create a new chicken element
-                newChicken.style.transform = `translate3d(${maxTranslateValue}px, 0, 0)`;
-            });
-        }
+        chickens[index].style.opacity = 1;
 
         // Move the chicken using translate3d for smoother transition
-        let translateValue = parseInt(currentChicken.style.transform.split('(')[1]) || 0;
         translateValue += direction * speed;
 
-        if (translateValue >= maxTranslateValue || translateValue <= 0) {
-            // If the chicken reaches the maximum translation value or goes back to the start, reset values
-            translateValue = 0;
-            direction = 1; // Set direction back to moving right
+        if (translateValue >= maxTranslateValue) {
+            // If the chicken reaches the maximum translation value, hide it
+            chickens[index].style.display = 'none';
+        } else {
+            // Continue moving the chicken
+            chickens[index].style.display = 'block';
+            chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
         }
-
-        currentChicken.style.display = 'block';
-        currentChicken.style.transition = `transform ${transitionDuration}s ease-in-out`;
-        currentChicken.style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
         index = (index + 1) % chickens.length;
     }
 
     // Set a delay before showing the first chicken (5 seconds)
     setTimeout(() => {
-        let firstChicken = createChicken();
         showNextChicken();
 
         // Set interval to switch chickens every 1 second (adjust as needed)
@@ -145,8 +126,6 @@
     function goToPage1() {
         window.location.href = "https://lipi2.github.io";
     }
-</script>
-
-
+  </script>
 </body>
 </html>
