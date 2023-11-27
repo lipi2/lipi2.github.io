@@ -114,14 +114,11 @@ function showNextChicken() {
     if (translateValue >= maxTranslateValue) {
         // Reset translateValue when the chicken goes beyond the maximum translation value
         translateValue = 0;
-        // Remove the chicken from the DOM
-        chickens[index].style.display = 'none';
-        clearInterval(intervalId); // Stop the interval
-    } else {
-        // Continue moving the chicken
-        chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
     }
+
+    // Continue moving the chicken
+    chickens[index].style.transition = `transform ${transitionDuration}s linear`;
+    chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 }
 
 // JavaScript function to navigate to page 1
