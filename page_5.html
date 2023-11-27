@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chicken Animation</title>
   <style>
-    /* Your CSS styles remain unchanged */
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -25,13 +24,10 @@
     .chicken {
       max-width: 100%;
       max-height: 30vh;
-      margin-top: 120px;
-      margin-bottom: 20px;
-      left: 500px;
-      opacity: 0;
       position: absolute;
       top: 120px; /* Adjust the top position as needed */
       transform: translate3d(0, 0, 0); /* Set initial transform */
+      opacity: 0; /* Start with opacity 0 */
     }
    
     #newText {
@@ -79,16 +75,14 @@
   
   <!-- Chicken Images -->
   <!-- Removed the first chicken -->
-  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 3">
-  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 3">
+  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 1">
+  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
-  
 
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
 
   <script>
-    // Right chicken
     let chickens = document.querySelectorAll('.chicken');
     let index = 0;
     let translateValue = 0;
@@ -121,6 +115,7 @@
             chickens[index].style.display = 'block';
             chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
             chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+            chickens[index].style.opacity = 1; // Make the chicken visible
         }
 
         index = (index + 1) % chickens.length;
@@ -132,7 +127,7 @@
 
         // Set interval to switch chickens every 1 second (adjust as needed)
         const intervalId = setInterval(showNextChicken, 150);
-    }, 5000);
+    }, 2000);
 
     // JavaScript function to navigate to page 1
     function goToPage1() {
