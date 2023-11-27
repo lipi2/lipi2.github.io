@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: green;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -78,10 +78,7 @@
   
   <!-- Chicken Images -->
   <!-- Removed the first chicken -->
-  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 3">
-  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 3">
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
-  
 
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
@@ -106,6 +103,19 @@
         if (translateValue >= maxTranslateValue) {
             // If the chicken reaches the maximum translation value, remove it from the DOM
             chickens[index].remove();
+
+            // Create a new chicken element
+            const newChicken = document.createElement('img');
+            newChicken.className = 'chicken';
+            newChicken.src = 'https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png'; // Change the source as needed
+            newChicken.alt = 'Chicken 3';
+            newChicken.style.opacity = 0;
+            document.body.appendChild(newChicken);
+
+            // Set a timeout to show the new chicken after a delay (adjust as needed)
+            setTimeout(() => {
+                newChicken.style.opacity = 1;
+            }, 100);
         } else {
             // Continue moving the chicken
             chickens[index].style.display = 'block';
