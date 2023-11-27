@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -61,7 +61,7 @@
       max-height: 30vh;
       margin-top: 120px;
       margin-bottom: 20px;
-      left: 500px;
+      left: 0; /* Initial position set to 0 */
       opacity: 0;
       position: absolute;
       top: 120px;
@@ -101,25 +101,16 @@
         chickens.forEach(chicken => chicken.style.opacity = 0);
         chickens[index].style.opacity = 1;
 
-        // Reset the chicken's position
-        chickens[index].style.transform = `translate3d(0, 0, 0)`;
-
         // Move the chicken using translate3d for smoother transition
         translateValue += direction * speed;
 
         if (translateValue >= maxTranslateValue) {
             // If the chicken reaches the maximum translation value, reset to the original location
-            chickens[index].style.left = '500px'; // Reset left property
-            chickens[index].style.top = '120px'; // Reset top property
-
-            // Wait for the transition to end before continuing with the next chicken
-            chickens[index].addEventListener('transitionend', () => {
-                showNextChicken();
-            }, { once: true });
-        } else {
-            // Continue moving the chicken
-            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+            translateValue = 0;
         }
+
+        // Continue moving the chicken
+        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
         index = (index + 1) % chickens.length;
     }
