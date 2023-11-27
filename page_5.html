@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -66,6 +66,7 @@
       position: absolute;
       top: 120px;
       transform: translate3d(0, 0, 0);
+      transition: transform 0.5s ease-in-out;
     }
   </style>
 </head>
@@ -105,23 +106,16 @@
 
         if (translateValue >= maxTranslateValue) {
             // If the chicken reaches the maximum translation value, reset to the original location
-            chickens[index].style.transition = 'none'; // Disable transition for the reset
-            chickens[index].style.display = 'none'; // Hide the chicken briefly
-            translateValue = 0;
-            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+            chickens[index].style.transform = `translate3d(0, 0, 0)`;
             chickens[index].style.left = '500px'; // Reset left property
             chickens[index].style.top = '120px'; // Reset top property
 
-            // Use setTimeout to show the chicken after a short delay
-            setTimeout(() => {
-                chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-                chickens[index].style.display = 'block'; // Show the chicken again
-                showNextChicken(); // Continue with the next chicken
-            }, 3000); // Adjust the delay as needed
+            // Wait for the transition to end before continuing with the next chicken
+            chickens[index].addEventListener('transitionend', () => {
+                showNextChicken();
+            }, { once: true });
         } else {
             // Continue moving the chicken
-            chickens[index].style.display = 'block';
-            chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
             chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
         }
 
@@ -134,7 +128,7 @@
 
         // Set interval to switch chickens every 1 second (adjust as needed)
         const intervalId = setInterval(showNextChicken, 150);
-    }, 2000);
+    }, 5000);
 
     // JavaScript function to navigate to page 1
     function goToPage1() {
