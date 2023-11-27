@@ -6,7 +6,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -111,15 +111,17 @@
 
             translateValue = 0; // Reset translateValue
         }
-
-        // Set a delay before showing the first chicken (5 seconds)
-        setTimeout(() => {
-            showNextChicken();
-        }, 2000);
     }
 
-    // Set interval to switch chickens every 1 second (adjust as needed)
-    const intervalId = setInterval(showNextChicken, 150);
+    // Set a delay before showing the first chicken (5 seconds)
+    setTimeout(() => {
+        showNextChicken();
+
+        // Set interval to switch chickens every 1 second (adjust as needed)
+        const intervalId = setInterval(() => {
+            showNextChicken();
+        }, 150);
+    }, 2000);
 
     // JavaScript function to navigate to page 1
     function goToPage1() {
