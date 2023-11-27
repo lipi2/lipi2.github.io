@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -101,7 +101,7 @@
             // If moving right and the first chicken is reached, reset the position
             chickens.forEach(chicken => {
                 chicken.style.transition = 'none';
-                chicken.style.transform = 'translate3d(0, 0, 0)';
+                chicken.style.transform = `translate3d(${maxTranslateValue}px, 0, 0)`;
             });
         }
 
