@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -106,9 +106,10 @@
 
         if (translateValue >= maxTranslateValue) {
             // If the chicken reaches the maximum translation value, make it invisible for 2 seconds
-            chickens[index].style.opacity = 0;
+            chickens[index].style.transition = 'opacity 0.5s ease-in-out'; // Adjust duration and easing as needed
             setTimeout(() => {
                 chickens[index].style.opacity = 1;
+                chickens[index].style.transition = ''; // Reset transition property
             }, 2000);
             //translateValue = 0; // Reset translateValue to continue rightward
         }
