@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -31,6 +31,7 @@
       position: absolute;
       top: 120px; /* Adjust the top position as needed */
       transform: translate3d(0, 0, 0); /* Set initial transform */
+      transition: opacity 0.5s ease-in-out; /* Add transition for opacity */
     }
    
     #newText {
@@ -105,9 +106,8 @@
 
         if (translateValue >= maxTranslateValue) {
             // If the chicken reaches the maximum translation value, make it invisible for 2 seconds
-            chickens[index].style.transition = 'opacity 0.5s ease-in-out'; // Adjust duration and easing as needed
+            chickens[index].style.opacity = 0;
             setTimeout(() => {
-                chickens[index].style.transition = ''; // Reset transition property
                 chickens[index].style.opacity = 1;
             }, 2000);
             //translateValue = 0; // Reset translateValue to continue rightward
