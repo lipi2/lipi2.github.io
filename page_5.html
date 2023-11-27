@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -84,7 +84,7 @@
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
 
- <script>
+<script>
     // Right chicken
     let chickens = document.querySelectorAll('.chicken');
     let index = 0;
@@ -105,9 +105,10 @@
             // If the chicken reaches the maximum translation value or goes back to the start, reset values
             translateValue = 0;
             direction = 1; // Set direction back to moving right
+            chickens[index].style.display = 'block';
         }
 
-        chickens[index].style.display = 'block';
+        // Set the transition property outside of the conditional block
         chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
         chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
