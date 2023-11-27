@@ -145,11 +145,13 @@ function showNextChicken_left() {
     index_left = (index_left + 1) % chickens_left.length;
 }
 
-// Show the first chicken initially
-showNextChicken_left();
-
-// Set interval to switch chickens every 1 second (adjust as needed)
-const intervalId_left = setInterval(showNextChicken_left, 150);
+// Set timeout to wait for 10 seconds before starting the interval for left chickens
+setTimeout(function() {
+    // Show the first chicken initially
+    showNextChicken_left();
+    // Set interval to switch chickens every 1 second (adjust as needed)
+    const intervalId_left = setInterval(showNextChicken_left, 150);
+}, 10000); // Wait for 10 seconds
 
 function showNextChicken() {
     chickens.forEach(chicken => chicken.style.opacity = 0);
@@ -187,9 +189,7 @@ const intervalId = setInterval(showNextChicken, 150);
 function goToPage1() {
     window.location.href = "https://lipi2.github.io";
 }
- 
 </script>
-
 
 </body>
 </html>
