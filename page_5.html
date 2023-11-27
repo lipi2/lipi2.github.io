@@ -6,7 +6,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -102,21 +102,22 @@
 
         // Move the chicken using translate3d for smoother transition
         translateValue += direction * speed;
+        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
         if (translateValue >= maxTranslateValue) {
             // If the chicken reaches the maximum translation value, reset to the original location
+            translateValue = 0;
             chickens[index].style.transform = `translate3d(0, 0, 0)`;
             chickens[index].style.left = '500px'; // Reset left property
             chickens[index].style.top = '120px'; // Reset top property
 
-            translateValue = 0; // Reset translateValue
+            // Move to the next chicken
+            index = (index + 1) % chickens.length;
         }
     }
 
     // Set a delay before showing the first chicken (5 seconds)
     setTimeout(() => {
-        showNextChicken();
-
         // Set interval to switch chickens every 1 second (adjust as needed)
         const intervalId = setInterval(() => {
             showNextChicken();
@@ -128,7 +129,6 @@
         window.location.href = "https://lipi2.github.io";
     }
 </script>
-
   
 </body>
 </html>
