@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -27,21 +27,10 @@
       margin-top: 120px;
       margin-bottom: 20px;
       left: 500px;
-      opacity: 1;
+      opacity: 0;
       position: absolute;
       top: 120px; /* Adjust the top position as needed */
       transform: translate3d(0, 0, 0); /* Set initial transform */
-    }
-
-    .chicken_left {
-      max-width: 100%;
-      max-height: 30vh;
-      margin-top: 120px;
-      margin-bottom: 20px;
-      left: 1000px;
-      opacity: 1;
-      position: absolute;
-      top: 120px; /* Adjust the top position as needed */
     }
    
     #newText {
@@ -88,87 +77,55 @@
   <img id="pilar2" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
   
   <!-- Chicken Images -->
-  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 1">
+  <!-- Removed the first chicken -->
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
 
- <!-- Chicken_left Images -->
-  <img class="chicken_left" src="https://raw.githubusercontent.com/lipi2/left_chicken/main/LEFT_chicken_01.png" alt="Chicken 1">
-  <img class="chicken_left" src="https://raw.githubusercontent.com/lipi2/left_chicken/main/LEFT_chicken_02.png" alt="Chicken 2">
-  <img class="chicken_left" src="https://raw.githubusercontent.com/lipi2/left_chicken/main/LEFT_chicken_03.png" alt="Chicken 3">
- 
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
- 
 
-<script>
-// Right chicken
-let chickens = document.querySelectorAll('.chicken');
-let index = 0;
-let translateValue = 0;
-let speed = 8; // Adjust the speed as needed
-const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
-const maxTranslateValue = 600; // Maximum translation value
+  <script>
+    // Right chicken
+    let chickens = document.querySelectorAll('.chicken');
+    let index = 0;
+    let translateValue = 0;
+    let speed = 8; // Adjust the speed as needed
+    const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
+    const maxTranslateValue = 600; // Maximum translation value
+    let direction = 1; // 1 for moving right, -1 for moving left
 
-// Left chicken
-let chickens_left = document.querySelectorAll('.chicken_left');
-let index_left = 0;
-let translateValue_left = 0;
-let speed_left = 8; // Adjust the speed as needed
-const maxTranslateValue_left = -200; // Maximum translation value for left movement
+    function showNextChicken() {
+        chickens.forEach(chicken => chicken.style.opacity = 0);
+        chickens[index].style.opacity = 1;
 
-function showNextChickenLeft() {
-    chickens_left.forEach(chicken_left => chicken_left.style.opacity = 0);
-    chickens_left[index_left].style.opacity = 1;
+        // Move the chicken using translate3d for smoother transition
+        translateValue += direction * speed;
 
-    translateValue_left += speed_left;
+        if (translateValue >= maxTranslateValue) {
+            // If the chicken reaches the maximum translation value, hide it
+            chickens[index].style.display = 'none';
+        } else {
+            // Continue moving the chicken
+            chickens[index].style.display = 'block';
+            chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+        }
 
-    if (translateValue_left >= maxTranslateValue_left) {
-        chickens_left[index_left].style.display = 'none';
-        clearInterval(intervalId_left);
-    } else {
-        chickens_left[index_left].style.transition = `transform ${transitionDuration}s ease-in-out`;
-        chickens_left[index_left].style.transform = `translate3d(${translateValue_left}px, 0, 0)`;
+        index = (index + 1) % chickens.length;
     }
 
-    index_left = (index_left + 1) % chickens_left.length;
-}
+    // Set a delay before showing the first chicken (5 seconds)
+    setTimeout(() => {
+        showNextChicken();
 
-// Show the first chicken initially
-showNextChickenLeft();
+        // Set interval to switch chickens every 1 second (adjust as needed)
+        const intervalId = setInterval(showNextChicken, 150);
+    }, 5000);
 
-// Set interval to switch chickens every 1 second (adjust as needed)
-const intervalId_left = setInterval(showNextChickenLeft, 150);
-
-function showNextChicken() {
-    chickens.forEach(chicken => chicken.style.opacity = 0);
-    chickens[index].style.opacity = 1;
-
-    translateValue += speed;
-
-    if (translateValue >= maxTranslateValue) {
-        chickens[index].style.display = 'none';
-        clearInterval(intervalId);
-    } else {
-        chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+    // JavaScript function to navigate to page 1
+    function goToPage1() {
+        window.location.href = "https://lipi2.github.io";
     }
-
-    index = (index + 1) % chickens.length;
-}
-
-// Show the first chicken initially
-showNextChicken();
-
-// Set interval to switch chickens every 1 second (adjust as needed)
-const intervalId = setInterval(showNextChicken, 150);
-
-// JavaScript function to navigate to page 1
-function goToPage1() {
-    window.location.href = "https://lipi2.github.io";
-}
-</script>
-
+  </script>
 </body>
 </html>
-
