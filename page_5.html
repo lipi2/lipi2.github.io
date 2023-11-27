@@ -86,7 +86,11 @@
 
   <script>
     // Your JavaScript code here
+
+    // Select all elements with the class 'chicken'
     let chickens = document.querySelectorAll('.chicken');
+    
+    // Initialize variables
     let index = 0;
     let translateValue = 0;
     let speed = 8;
@@ -95,42 +99,56 @@
     const resetDelay = 2000;
     let direction = 1;
 
+    // Function to show the next chicken in the animation
     function showNextChicken() {
+        // Hide all chickens
         chickens.forEach(chicken => chicken.style.opacity = 0);
+        
+        // Show the current chicken
         chickens[index].style.opacity = 1;
 
+        // Move the chicken horizontally
         translateValue += direction * speed;
 
+        // Check if the chicken has reached the end
         if (translateValue >= maxTranslateValue) {
+            // Hide the current chicken
             chickens[index].style.display = 'none';
 
+            // Reset and show the current chicken after a delay
             setTimeout(() => {
                 chickens[index].style.display = 'block';
                 translateValue = 0;
                 chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
+                // Reset transition after a short delay
                 setTimeout(() => {
                     chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
                 }, 0);
             }, resetDelay);
         } else {
+            // Show the current chicken and apply the movement
             chickens[index].style.display = 'block';
             chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
             chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
         }
 
+        // Move to the next chicken
         index = (index + 1) % chickens.length;
     }
 
+    // Start the animation after a delay
     setTimeout(() => {
         showNextChicken();
 
+        // Set up a recurring interval for the animation
         const intervalId = setInterval(showNextChicken, 150);
     }, 8000);
 
+    // Function to navigate to another page
     function goToPage1() {
         window.location.href = "https://lipi2.github.io";
     }
-  </script>
+</script>
 </body>
 </html>
