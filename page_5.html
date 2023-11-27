@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -109,8 +109,13 @@
       // Show the chicken again without delay
       translateValue = 0; // Reset the translation value
       chickens[index].style.display = 'block';
-      chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+      chickens[index].style.transition = 'none'; // Remove transition for instant reset
       chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+      // Restore transition after the reset
+      setTimeout(() => {
+        chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+      }, 0);
     } else {
       // Continue moving the chicken
       chickens[index].style.display = 'block';
@@ -132,6 +137,5 @@
     window.location.href = "https://lipi2.github.io";
   }
 </script>
-
 </body>
 </html>
