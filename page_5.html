@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -103,6 +103,7 @@
     let speed = 8; // Adjust the speed as needed
     const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
     const maxTranslateValue = 600; // Maximum translation value
+    const resetDelay = 2000; // 2-second delay before resetting the chicken
     let direction = 1; // 1 for moving right, -1 for moving left
 
     function showNextChicken() {
@@ -113,13 +114,37 @@
         translateValue += direction * speed;
 
         if (translateValue >= maxTranslateValue) {
-            // If the chicken reaches the maximum translation value, reset it instantly
-            translateValue = 0; // Reset the translation value
-        }
+            // If the chicken reaches the maximum translation value, wait 2 seconds, then reset
+            setTimeout(() => {
+                translateValue = 0; // Reset the translation value
 
-        // Continue moving the chicken
-        chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+                // Use requestAnimationFrame for smooth animation
+                requestAnimationFrame(() => {
+                    chickens[index].style.transition = 'none'; // Remove transition for instant reset
+                    chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+                    // Restore transition after the reset
+                    requestAnimationFrame(() => {
+                        chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+                        
+                        // Immediately continue moving the chicken
+                        requestAnimationFrame(() => {
+                            showNextChicken();
+                        });
+                    });
+                });
+            }, resetDelay);
+        } else {
+            // Continue moving the chicken
+            chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+            // Use requestAnimationFrame for smooth animation
+            requestAnimationFrame(() => {
+                // Immediately continue moving the chicken
+                showNextChicken();
+            });
+        }
 
         index = (index + 1) % chickens.length;
     }
@@ -129,7 +154,9 @@
         showNextChicken();
 
         // Set interval to switch chickens every 1 second (adjust as needed)
-        const intervalId = setInterval(showNextChicken, 150);
+        const intervalId = setInterval(() => {
+            showNextChicken();
+        }, 150);
     }, 5000);
 
     // JavaScript function to navigate to page 1
@@ -137,7 +164,6 @@
         window.location.href = "https://lipi2.github.io";
     }
 </script>
-
   
 </body>
 </html>
