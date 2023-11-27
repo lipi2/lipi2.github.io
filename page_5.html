@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -121,7 +121,7 @@
             setTimeout(() => {
                 chickens[index].style.display = 'block';
                 translateValue = 0; // Reset the translation value
-                chickens[index].style.transition = 'none'; // Remove transition for instant reset
+                //chickens[index].style.transition = 'none'; // Remove transition for instant reset
                 chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
                 // Restore transition after the reset
