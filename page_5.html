@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -117,17 +117,27 @@
             // If the chicken reaches the maximum translation value, hide it
             chickens[index].style.display = 'none';
 
-            // Wait for 2 seconds, then reset the chicken
-            setTimeout(() => {
-                chickens[index].style.display = 'block';
-                translateValue = 0; // Reset the translation value
-                chickens[index].style.transition = 'none'; // Remove transition for instant reset
-                chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+            // Reset the chicken after the transition ends
+            chickens[index].addEventListener('transitionend', function resetAfterTransition() {
+                // Remove the event listener to avoid multiple calls
+                chickens[index].removeEventListener('transitionend', resetAfterTransition);
 
-                // Restore transition after the reset
-                chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-            }, resetDelay);
-          
+                // Reset the chicken after the 2-second delay
+                setTimeout(() => {
+                    chickens[index].style.display = 'block';
+                    translateValue = 0; // Reset the translation value
+                    chickens[index].style.transition = 'none'; // Remove transition for instant reset
+                    chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+                    // Restore transition after the reset
+                    setTimeout(() => {
+                        chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+                    }, 0);
+                }, resetDelay);
+            });
+
+            // Trigger the transition
+            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
         } else {
             // Continue moving the chicken
             chickens[index].style.display = 'block';
@@ -151,6 +161,7 @@
         window.location.href = "https://lipi2.github.io";
     }
 </script>
+
 
 </body>
 </html>
