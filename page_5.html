@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -66,7 +66,7 @@
       position: absolute;
       top: 120px;
       transform: translate3d(0, 0, 0);
-      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      transition: opacity 0.5s ease-in-out, transform 1s linear; /* Adjust the transition duration as needed */
     }
   </style>
 </head>
@@ -97,9 +97,6 @@
     let direction = 1; // 1 for moving right, -1 for moving left
 
     function showNextChicken() {
-        // Hide all chickens
-        chickens.forEach(chicken => chicken.style.opacity = 0);
-
         // Move the chicken using translate3d for smoother transition
         translateValue += direction * speed;
 
@@ -108,9 +105,18 @@
             translateValue = 0;
         }
 
-        // Show the current chicken and continue moving
-        chickens[index].style.opacity = 1;
+        // Set the transform property without transition to immediately move to the new position
+        chickens[index].style.transition = 'none';
         chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+        // Trigger a reflow to apply the transform immediately (without this, the transition won't be removed)
+        void chickens[index].offsetWidth;
+        // Restore the transition property to enable smooth transitions for subsequent movements
+        chickens[index].style.transition = '';
+
+        // Hide all chickens
+        chickens.forEach(chicken => chicken.style.opacity = 0);
+        // Show the current chicken
+        chickens[index].style.opacity = 1;
 
         index = (index + 1) % chickens.length;
     }
