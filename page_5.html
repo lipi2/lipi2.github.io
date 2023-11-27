@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: green;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -84,61 +84,64 @@
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
 
-  <script>
-    // Right chicken
-    let chickens = document.querySelectorAll('.chicken');
-    let index = 0;
-    let translateValue = 0;
-    let speed = 8; // Adjust the speed as needed
-    const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
-    const maxTranslateValue = 600; // Maximum translation value
-    let direction = 1; // 1 for moving right, -1 for moving left
+ <script>
+  // Right chicken
+  let chickens = document.querySelectorAll('.chicken');
+  let index = 0;
+  let translateValue = 0;
+  let speed = 8; // Adjust the speed as needed
+  const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
+  const maxTranslateValue = 600; // Maximum translation value
+  let direction = 1; // 1 for moving right, -1 for moving left
 
-    function showNextChicken() {
-        chickens.forEach(chicken => chicken.style.opacity = 0);
-        chickens[index].style.opacity = 1;
+  function showNextChicken() {
+    chickens.forEach(chicken => chicken.style.opacity = 0);
+    chickens[index].style.opacity = 1;
 
-        // Move the chicken using translate3d for smoother transition
-        translateValue += direction * speed;
+    // Move the chicken using translate3d for smoother transition
+    translateValue += direction * speed;
 
-        if (translateValue >= maxTranslateValue) {
-            // If the chicken reaches the maximum translation value, remove it from the DOM
-            chickens[index].remove();
+    if (translateValue >= maxTranslateValue) {
+      // If the chicken reaches the maximum translation value, remove it from the DOM
+      chickens[index].remove();
 
-            // Create a new chicken element
-            const newChicken = document.createElement('img');
-            newChicken.className = 'chicken';
-            newChicken.src = 'https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png'; // Change the source as needed
-            newChicken.alt = 'Chicken 3';
-            newChicken.style.opacity = 0;
-            document.body.appendChild(newChicken);
+      // Create a new chicken element
+      const newChicken = document.createElement('img');
+      newChicken.className = 'chicken';
+      newChicken.src = 'https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png'; // Change the source as needed
+      newChicken.alt = 'Chicken 3';
+      newChicken.style.opacity = 0;
+      document.body.appendChild(newChicken);
 
-            // Set a timeout to show the new chicken after a delay (adjust as needed)
-            setTimeout(() => {
-                newChicken.style.opacity = 1;
-            }, 100);
-        } else {
-            // Continue moving the chicken
-            chickens[index].style.display = 'block';
-            chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
-        }
+      // Add the new chicken to the array
+      chickens = [...chickens, newChicken];
 
-        index = (index + 1) % chickens.length;
+      // Set a timeout to show the new chicken after a delay (adjust as needed)
+      setTimeout(() => {
+        newChicken.style.opacity = 1;
+      }, 100);
+    } else {
+      // Continue moving the chicken
+      chickens[index].style.display = 'block';
+      chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+      chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
     }
 
-    // Set a delay before showing the first chicken (5 seconds)
-    setTimeout(() => {
-        showNextChicken();
+    index = (index + 1) % chickens.length;
+  }
 
-        // Set interval to switch chickens every 1 second (adjust as needed)
-        const intervalId = setInterval(showNextChicken, 150);
-    }, 5000);
+  // Set a delay before showing the first chicken (5 seconds)
+  setTimeout(() => {
+    showNextChicken();
 
-    // JavaScript function to navigate to page 1
-    function goToPage1() {
-        window.location.href = "https://lipi2.github.io";
-    }
-  </script>
+    // Set interval to switch chickens every 1 second (adjust as needed)
+    const intervalId = setInterval(showNextChicken, 150);
+  }, 5000);
+
+  // JavaScript function to navigate to page 1
+  function goToPage1() {
+    window.location.href = "https://lipi2.github.io";
+  }
+</script>
 </body>
 </html>
