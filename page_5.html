@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +6,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -61,12 +60,12 @@
       max-height: 30vh;
       margin-top: 120px;
       margin-bottom: 20px;
-      left: 0; /* Initial position set to 0 */
+      left: 500px;
       opacity: 0;
       position: absolute;
       top: 120px;
-      transform: translateX(0);
-      transition: opacity 0.5s ease-in-out, transform 5s linear, left 0.5s ease-in-out; /* Adjust the transition duration as needed */
+      transform: translate3d(0, 0, 0);
+      transition: transform 0.5s ease-in-out;
     }
   </style>
 </head>
@@ -93,27 +92,31 @@
     let index = 0;
     let translateValue = 0;
     let speed = 8; // Adjust the speed as needed
+    const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
     const maxTranslateValue = 600; // Maximum translation value
     let direction = 1; // 1 for moving right, -1 for moving left
 
     function showNextChicken() {
-        // Hide all chickens
         chickens.forEach(chicken => chicken.style.opacity = 0);
+        chickens[index].style.opacity = 1;
 
-        // Move the chicken using translateX for smoother transition
+        // Move the chicken using translate3d for smoother transition
         translateValue += direction * speed;
 
         if (translateValue >= maxTranslateValue) {
             // If the chicken reaches the maximum translation value, reset to the original location
-            translateValue = 0;
+            chickens[index].style.transform = `translate3d(0, 0, 0)`;
+            chickens[index].style.left = '500px'; // Reset left property
+            chickens[index].style.top = '120px'; // Reset top property
+
+            // Wait for the transition to end before continuing with the next chicken
+            chickens[index].addEventListener('transitionend', () => {
+                showNextChicken();
+            }, { once: true });
+        } else {
+            // Continue moving the chicken
+            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
         }
-
-        // Show the current chicken and continue moving
-        chickens[index].style.opacity = 1;
-        chickens[index].style.transform = `translateX(${translateValue}px)`;
-
-        // Set the left property for immediate position change (no transition)
-        chickens[index].style.left = `${translateValue}px`;
 
         index = (index + 1) % chickens.length;
     }
