@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -121,14 +121,13 @@
             setTimeout(() => {
                 chickens[index].style.display = 'block';
                 translateValue = 0; // Reset the translation value
-                //chickens[index].style.transition = 'none'; // Remove transition for instant reset
+                chickens[index].style.transition = 'none'; // Remove transition for instant reset
                 chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
                 // Restore transition after the reset
-                setTimeout(() => {
-                    chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-                }, 0);
+                chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
             }, resetDelay);
+          
         } else {
             // Continue moving the chicken
             chickens[index].style.display = 'block';
