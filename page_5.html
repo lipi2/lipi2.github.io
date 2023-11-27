@@ -6,7 +6,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -95,7 +95,6 @@
     const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
     const maxTranslateValue = 600; // Maximum translation value
     const hideDuration = 2000; // Duration to hide the chicken in milliseconds
-    let isHidden = false; // Track if the chicken is currently hidden
     let direction = 1; // 1 for moving right, -1 for moving left
 
     function showNextChicken() {
@@ -106,24 +105,18 @@
         translateValue += direction * speed;
 
         if (translateValue >= maxTranslateValue) {
-            if (!isHidden) {
-                // If the chicken reaches the maximum translation value and is not hidden, hide it for 2 seconds
-                isHidden = true;
-                chickens[index].style.transform = `translate3d(0, 0, 0)`;
-                chickens[index].style.left = '500px'; // Reset left property
-                chickens[index].style.top = '120px'; // Reset top property
+            // If the chicken reaches the maximum translation value, hide it for 2 seconds
+            chickens[index].style.transform = `translate3d(0, 0, 0)`;
+            chickens[index].style.left = '500px'; // Reset left property
+            chickens[index].style.top = '120px'; // Reset top property
 
-                setTimeout(() => {
-                    isHidden = false;
-                    showNextChicken();
-                }, hideDuration);
-            }
+            setTimeout(() => {
+                showNextChicken();
+            }, hideDuration);
         }
 
         // Continue moving the chicken outside of the removed else block
-        if (!isHidden) {
-            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
-        }
+        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
         index = (index + 1) % chickens.length;
     }
