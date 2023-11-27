@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -66,7 +66,7 @@
       position: absolute;
       top: 120px;
       transform: translateX(0);
-      transition: opacity 0.5s ease-in-out, transform 5s linear; /* Adjust the transition duration as needed */
+      transition: opacity 0.5s ease-in-out, transform 5s linear, left 0.5s ease-in-out; /* Adjust the transition duration as needed */
     }
   </style>
 </head>
@@ -111,6 +111,9 @@
         // Show the current chicken and continue moving
         chickens[index].style.opacity = 1;
         chickens[index].style.transform = `translateX(${translateValue}px)`;
+
+        // Set the left property for immediate position change (no transition)
+        chickens[index].style.left = `${translateValue}px`;
 
         index = (index + 1) % chickens.length;
     }
