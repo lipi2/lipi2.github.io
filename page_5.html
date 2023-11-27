@@ -6,7 +6,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -86,7 +86,6 @@
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
 
-<script>
     // Right chicken
     let chickens = document.querySelectorAll('.chicken');
     let index = 0;
@@ -94,6 +93,7 @@
     let speed = 8; // Adjust the speed as needed
     const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
     const maxTranslateValue = 600; // Maximum translation value
+    const hideDuration = 2000; // Duration to hide the chicken in milliseconds
     let direction = 1; // 1 for moving right, -1 for moving left
 
     function showNextChicken() {
@@ -104,15 +104,14 @@
         translateValue += direction * speed;
 
         if (translateValue >= maxTranslateValue) {
-            // If the chicken reaches the maximum translation value, reset to the original location
+            // If the chicken reaches the maximum translation value, hide it for 2 seconds
             chickens[index].style.transform = `translate3d(0, 0, 0)`;
             chickens[index].style.left = '500px'; // Reset left property
             chickens[index].style.top = '120px'; // Reset top property
 
-            // Wait for the transition to end before continuing with the next chicken
-            chickens[index].addEventListener('transitionend', () => {
+            setTimeout(() => {
                 showNextChicken();
-            }, { once: true });
+            }, hideDuration);
         }
 
         // Continue moving the chicken outside of the removed else block
