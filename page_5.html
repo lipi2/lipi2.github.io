@@ -6,7 +6,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -109,17 +109,6 @@
             chickens[index].style.left = '500px'; // Reset left property
             chickens[index].style.top = '120px'; // Reset top property
 
-            // Wait for the transition to end before continuing with the next chicken
-            chickens[index].addEventListener('transitionend', () => {
-                showNextChicken();
-            }, { once: true });
-        }
-
-        // Continue moving the chicken outside of the removed else block
-        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
-
-        index = (index + 1) % chickens.length;
-    }
 
     // Set a delay before showing the first chicken (5 seconds)
     setTimeout(() => {
