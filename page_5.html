@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -83,47 +83,58 @@
 
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
-
 <script>
     // Right chicken
-    let chickens = document.querySelectorAll('.chicken');
+    let container = document.getElementById('chicken-container'); // assuming there is a container element
     let index = 0;
     let speed = 8; // Adjust the speed as needed
     const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
     const maxTranslateValue = 600; // Maximum translation value
     let direction = 1; // 1 for moving right, -1 for moving left
 
+    function createChicken() {
+        let chicken = document.createElement('div');
+        chicken.classList.add('chicken');
+        container.appendChild(chicken);
+        return chicken;
+    }
+
     function showNextChicken() {
+        let chickens = document.querySelectorAll('.chicken');
         chickens.forEach(chicken => chicken.style.opacity = 0);
-        chickens[index].style.opacity = 1;
+        
+        let currentChicken = chickens[index];
+        currentChicken.style.opacity = 1;
 
         if (direction === 1 && index === 0) {
             // If moving right and the first chicken is reached, reset the position
             chickens.forEach(chicken => {
-                chicken.style.transition = 'none';
-                chicken.style.transform = `translate3d(${maxTranslateValue}px, 0, 0)`;
+                chicken.remove(); // Remove the existing chicken element
+                let newChicken = createChicken(); // Create a new chicken element
+                newChicken.style.transform = `translate3d(${maxTranslateValue}px, 0, 0)`;
             });
         }
 
         // Move the chicken using translate3d for smoother transition
-        let translateValue = parseInt(chickens[index].style.transform.split('(')[1]) || 0;
+        let translateValue = parseInt(currentChicken.style.transform.split('(')[1]) || 0;
         translateValue += direction * speed;
 
         if (translateValue >= maxTranslateValue || translateValue <= 0) {
             // If the chicken reaches the maximum translation value or goes back to the start, reset values
             translateValue = 0;
             direction = 1; // Set direction back to moving right
-            chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
         }
 
-        chickens[index].style.display = 'block';
-        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+        currentChicken.style.display = 'block';
+        currentChicken.style.transition = `transform ${transitionDuration}s ease-in-out`;
+        currentChicken.style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
         index = (index + 1) % chickens.length;
     }
 
     // Set a delay before showing the first chicken (5 seconds)
     setTimeout(() => {
+        let firstChicken = createChicken();
         showNextChicken();
 
         // Set interval to switch chickens every 1 second (adjust as needed)
@@ -135,6 +146,7 @@
         window.location.href = "https://lipi2.github.io";
     }
 </script>
+
 
 </body>
 </html>
