@@ -86,7 +86,7 @@
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
 
-  <script>
+<script>
     // Right chicken
     let chickens = document.querySelectorAll('.chicken');
     let index = 0;
@@ -114,8 +114,12 @@
                 showNextChicken();
             }, { once: true });
         }
+
+        // Continue moving the chicken outside of the removed else block
+        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+        index = (index + 1) % chickens.length;
     }
-       
 
     // Set a delay before showing the first chicken (5 seconds)
     setTimeout(() => {
@@ -129,7 +133,7 @@
     function goToPage1() {
         window.location.href = "https://lipi2.github.io";
     }
-  </script>
-
+</script>
+  
 </body>
 </html>
