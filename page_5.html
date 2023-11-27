@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -97,40 +97,29 @@
     let direction = 1; // 1 for moving right, -1 for moving left
 
     function showNextChicken() {
-    chickens.forEach(chicken => chicken.style.opacity = 0);
-    chickens[index].style.opacity = 1;
+        chickens.forEach(chicken => chicken.style.opacity = 0);
+        chickens[index].style.opacity = 1;
 
-    // Move the chicken using translate3d for smoother transition
-    translateValue += direction * speed;
+        // Move the chicken using translate3d for smoother transition
+        translateValue += direction * speed;
 
-    if (translateValue >= maxTranslateValue) {
-        // If the chicken reaches the maximum translation value, make it invisible for 2 seconds
-        chickens[index].style.transition = 'opacity 0.5s ease-in-out'; // Adjust duration and easing as needed
-        chickens[index].style.opacity = 0;
-        setTimeout(() => {
-            chickens[index].style.transition = ''; // Reset transition property
-            chickens[index].style.opacity = 1;
-        }, 2000);
-        // translateValue = 0; // Reset translateValue to continue rightward
+        if (translateValue >= maxTranslateValue) {
+            // If the chicken reaches the maximum translation value, make it invisible for 2 seconds
+            chickens[index].style.transition = 'opacity 0.5s ease-in-out'; // Adjust duration and easing as needed
+            setTimeout(() => {
+                chickens[index].style.transition = ''; // Reset transition property
+                chickens[index].style.opacity = 1;
+            }, 2000);
+            translateValue = 0; // Reset translateValue to continue rightward
+        }
+
+        // Continue moving the chicken
+        chickens[index].style.display = 'block';
+        chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+        index = (index + 1) % chickens.length;
     }
-
-    // Continue moving the chicken
-    chickens[index].style.display = 'block';
-    chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-    chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
-
-    index = (index + 1) % chickens.length;
-}
-
-
-    // Continue moving the chicken
-    chickens[index].style.display = 'block';
-    chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-    chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
-
-    index = (index + 1) % chickens.length;
-}
-
 
     // Set a delay before showing the first chicken (5 seconds)
     setTimeout(() => {
