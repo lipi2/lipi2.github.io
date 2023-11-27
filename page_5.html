@@ -105,13 +105,15 @@
 
         if (translateValue >= maxTranslateValue) {
             // If the chicken reaches the maximum translation value, reset to the original location
-            chickens[index].style.transition = 'none'; // Disable transition for the reset
             translateValue = 0;
+            chickens[index].style.transition = 'none'; // Disable transition for the reset
             chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+            chickens[index].style.left = '500px'; // Reset left property
+            chickens[index].style.top = '120px'; // Reset top property
             setTimeout(() => {
                 chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
                 showNextChicken(); // Continue with the next chicken
-            }, 3000); // Adjust the delay as needed
+            }, 10); // Adjust the delay as needed
         } else {
             // Continue moving the chicken
             chickens[index].style.display = 'block';
