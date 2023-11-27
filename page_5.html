@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -104,8 +104,14 @@
         translateValue += direction * speed;
 
         if (translateValue >= maxTranslateValue) {
-            // If the chicken reaches the maximum translation value, hide it
-            chickens[index].style.display = 'none';
+            // If the chicken reaches the maximum translation value, reset to the original location
+            translateValue = 0;
+            chickens[index].style.transition = 'none'; // Disable transition for the reset
+            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+            setTimeout(() => {
+                chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+                showNextChicken(); // Continue with the next chicken
+            }, 0);
         } else {
             // Continue moving the chicken
             chickens[index].style.display = 'block';
