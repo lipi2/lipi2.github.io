@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -98,28 +98,24 @@
     let direction = 1; // 1 for moving right, -1 for moving left
 
     function showNextChicken() {
-        chickens.forEach(chicken => chicken.style.opacity = 0);
-        chickens[index].style.opacity = 1;
+    chickens.forEach(chicken => chicken.style.opacity = 0);
+    chickens[index].style.opacity = 1;
 
-        // Move the chicken using translate3d for smoother transition
-        translateValue += direction * speed;
+    // Move the chicken using translate3d for smoother transition
+    translateValue += direction * speed;
 
-        if (translateValue >= maxTranslateValue) {
-            // If the chicken reaches the maximum translation value, make it invisible for 2 seconds
-            setTimeout(() => {
-                chickens[index].style.opacity = 0;
-                chickens[index].style.display = 'none'; // Hide the chicken element
-            }, 2000);
-            //nothing 
-        }
-
-        // Continue moving the chicken
-        chickens[index].style.display = 'none';
-        chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
-
-        index = (index + 1) % chickens.length;
+    if (translateValue >= maxTranslateValue) {
+        // If the chicken reaches the maximum translation value, do nothing
+        // You can remove the code here if you don't want any specific action
     }
+
+    // Continue moving the chicken
+    chickens[index].style.display = 'block';
+    chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+    chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+    index = (index + 1) % chickens.length;
+}
 
     // Set a delay before showing the first chicken (5 seconds)
     setTimeout(() => {
