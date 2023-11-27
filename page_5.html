@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: orange;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -92,6 +92,7 @@
     let speed = 8;
     const transitionDuration = 0.5;
     const maxTranslateValue = 600;
+    const hideDelay = 6000; // Adjust this value for the delay before hiding the chicken
     let direction = 1;
 
     function showNextChicken() {
@@ -101,15 +102,22 @@
         translateValue += direction * speed;
 
         if (translateValue >= maxTranslateValue) {
-            chickens[index].style.display = 'none';
+            // Hide the current chicken after a delay
+            setTimeout(() => {
+                chickens[index].style.display = 'none';
+            }, hideDelay);
 
-            // Reset and show the current chicken immediately
-            chickens[index].style.display = 'block';
-            translateValue = 0;
-            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+            // Reset and show the current chicken after a delay
+            setTimeout(() => {
+                chickens[index].style.display = 'block';
+                translateValue = 0;
+                chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
-            // Reset transition immediately
-            chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+                // Reset transition after a short delay
+                setTimeout(() => {
+                    chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+                }, 0);
+            }, hideDelay);
         } else {
             chickens[index].style.display = 'block';
             chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
