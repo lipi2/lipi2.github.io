@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -107,18 +107,10 @@
       chickens[index].style.display = 'none';
 
       // Show the chicken again without delay
-      setTimeout(() => {
-        chickens[index].style.display = 'block';
-        translateValue = 0; // Reset the translation value
-        chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
-
-        // Apply the delay only when the chicken reappears
-        setTimeout(() => {
-          // Continue moving the chicken
-          showNextChicken();
-        }, hideDuration);
-      }, 0);
+      translateValue = 0; // Reset the translation value
+      chickens[index].style.display = 'block';
+      chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+      chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
     } else {
       // Continue moving the chicken
       chickens[index].style.display = 'block';
