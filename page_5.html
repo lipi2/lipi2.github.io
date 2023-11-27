@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -108,6 +108,7 @@
             // If the chicken reaches the maximum translation value, make it invisible for 2 seconds
             setTimeout(() => {
                 chickens[index].style.opacity = 0;
+                chickens[index].style.display = 'none'; // Hide the chicken element
             }, 2000);
             //nothing 
         }
