@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -78,7 +78,6 @@
   
   <!-- Chicken Images -->
   <!-- Removed the first chicken -->
-  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 2">
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
 
   <!-- New Text with ID "newText" -->
@@ -102,8 +101,8 @@
         translateValue += direction * speed;
 
         if (translateValue >= maxTranslateValue) {
-            // If the chicken reaches the maximum translation value, hide it
-            chickens[index].style.display = 'none';
+            // If the chicken reaches the maximum translation value, remove it from the DOM
+            chickens[index].remove();
         } else {
             // Continue moving the chicken
             chickens[index].style.display = 'block';
