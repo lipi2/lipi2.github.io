@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: green;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -84,54 +84,62 @@
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
 
- <script>
-  // Right chicken
-  let chickens = document.querySelectorAll('.chicken');
-  let index = 0;
-  let translateValue = 0;
-  let speed = 8; // Adjust the speed as needed
-  const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
-  const maxTranslateValue = 600; // Maximum translation value
-  const resetDelay = 5000; // 5-second delay before resetting the chicken
-  let direction = 1; // 1 for moving right, -1 for moving left
+  <script>
+    // Right chicken
+    let chickens = document.querySelectorAll('.chicken');
+    let index = 0;
+    let translateValue = 0;
+    let speed = 8; // Adjust the speed as needed
+    const transitionDuration = 0.5; // Adjust the duration of the transition in seconds
+    const maxTranslateValue = 600; // Maximum translation value
+    const resetDelay = 5000; // 5-second delay before resetting the chicken
+    let direction = 1; // 1 for moving right, -1 for moving left
 
-  function showNextChicken() {
-    // Check if the chicken is at the maximum translation value
-    if (translateValue >= maxTranslateValue) {
-      // If the chicken reaches the maximum translation value, reset immediately
-      chickens[index].style.transition = 'none'; // Remove transition for instant reset
-      translateValue = 0; // Reset the translation value
-      chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
-    } else {
-      // Continue moving the chicken
+    function showNextChicken() {
+      chickens.forEach(chicken => chicken.style.opacity = 0);
+      chickens[index].style.opacity = 1;
+
+      // Move the chicken using translate3d for smoother transition
       translateValue += direction * speed;
-      chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-      chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+      if (translateValue >= maxTranslateValue) {
+        // If the chicken reaches the maximum translation value, hide it
+        chickens[index].style.display = 'none';
+
+        // Wait for 5 seconds, then reset the chicken
+        setTimeout(() => {
+          chickens[index].style.display = 'block';
+          translateValue = 0; // Reset the translation value
+          chickens[index].style.transition = 'none'; // Remove transition for instant reset
+          chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+
+          // Restore transition after the reset
+          setTimeout(() => {
+            chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+          }, 0);
+        }, resetDelay);
+      } else {
+        // Continue moving the chicken
+        chickens[index].style.display = 'block';
+        chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
+        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+      }
+
+      index = (index + 1) % chickens.length;
     }
 
-    // Show the chicken
-    chickens[index].style.display = 'block';
+    // Set a delay before showing the first chicken (5 seconds)
+    setTimeout(() => {
+      showNextChicken();
 
-    // Hide other chickens
-    chickens.forEach((chicken, i) => {
-      if (i !== index) {
-        chicken.style.opacity = 0;
-        chicken.style.display = 'none';
-      }
-    });
+      // Set interval to switch chickens every 1 second (adjust as needed)
+      const intervalId = setInterval(showNextChicken, 150);
+    }, 0);
 
-    // Move to the next chicken
-    index = (index + 1) % chickens.length;
-  }
-
-  // Set interval to switch chickens every 1 second (adjust as needed)
-  const intervalId = setInterval(showNextChicken, 150);
-
-  // JavaScript function to navigate to page 1
-  function goToPage1() {
-    window.location.href = "https://lipi2.github.io";
-  }
-</script>
-  
+    // JavaScript function to navigate to page 1
+    function goToPage1() {
+      window.location.href = "https://lipi2.github.io";
+    }
+  </script>
 </body>
 </html>
