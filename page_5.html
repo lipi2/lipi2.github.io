@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: pink;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -105,11 +105,11 @@
 
     if (translateValue >= maxTranslateValue) {
         // If the chicken reaches the maximum translation value, make it invisible for 2 seconds
-        chickens[index].style.display = 'none';
+        chickens[index].style.visibility = 'hidden';
         setTimeout(() => {
-            chickens[index].style.display = 'block';
+            chickens[index].style.visibility = 'visible';
         }, 2000);
-        //translateValue = 0; // Reset translateValue to continue rightward
+        // translateValue = 0; // Reset translateValue to continue rightward
     }
 
     // Continue moving the chicken
