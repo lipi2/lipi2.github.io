@@ -92,7 +92,6 @@
     let speed = 8;
     const transitionDuration = 0.5;
     const maxTranslateValue = 600;
-    const resetDelay = 2000;
     let direction = 1;
 
     function showNextChicken() {
@@ -104,15 +103,13 @@
         if (translateValue >= maxTranslateValue) {
             chickens[index].style.display = 'none';
 
-            // Reset and show the current chicken after a delay
-            setTimeout(() => {
-                chickens[index].style.display = 'block';
-                translateValue = 0;
-                chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+            // Reset and show the current chicken immediately
+            chickens[index].style.display = 'block';
+            translateValue = 0;
+            chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
 
-                // Reset transition immediately (removed the setTimeout)
-                chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
-            }, resetDelay);
+            // Reset transition immediately
+            chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
         } else {
             chickens[index].style.display = 'block';
             chickens[index].style.transition = `transform ${transitionDuration}s ease-in-out`;
@@ -132,5 +129,6 @@
         window.location.href = "https://lipi2.github.io";
     }
   </script>
+  
 </body>
 </html>
