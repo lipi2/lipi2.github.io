@@ -78,7 +78,8 @@
   
   <!-- Chicken Images -->
   <!-- Removed the first chicken -->
-  
+  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 3">
+  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 3">
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
   
 
@@ -103,8 +104,8 @@
         translateValue += direction * speed;
 
         if (translateValue >= maxTranslateValue) {
-            // Set left property to 500px
-            chickens[index].style.left = '500px';
+            // If the chicken reaches the maximum translation value, remove it from the DOM
+            chickens[index].remove();
         } else {
             // Continue moving the chicken
             chickens[index].style.display = 'block';
@@ -121,13 +122,12 @@
 
         // Set interval to switch chickens every 1 second (adjust as needed)
         const intervalId = setInterval(showNextChicken, 150);
-    }, 5000);
+    }, 0);
 
     // JavaScript function to navigate to page 1
     function goToPage1() {
         window.location.href = "https://lipi2.github.io";
     }
-</script>
-
+  </script>
 </body>
 </html>
