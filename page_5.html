@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: green;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -109,9 +109,8 @@
             chickens[index].style.opacity = 0;
             
             // Set a timeout to make the chicken reappear after 2 seconds
-            setTimeout(() => {
-                chickens[index].style.opacity = 1;
-            }, 2000);
+            const intervalId = setInterval(showNextChicken, 150);
+        }, 2000);
             
             // Reset translateValue to continue rightward
             //translateValue = 0;
