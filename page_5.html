@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -26,7 +26,7 @@
       max-height: 30vh;
       margin-top: 10vh; /* Use percentage or viewport units for vertical positioning */
       margin-bottom: 2vh;
-      left: 25vw; /* Use percentage or viewport units for horizontal positioning */
+      left: 30vw; /* Use percentage or viewport units for horizontal positioning */
       transform: translate3d(-50%, 0, 0); /* Center the chicken horizontally */
       opacity: 1;
       position: absolute;
@@ -92,7 +92,8 @@ let chickens = document.querySelectorAll('.chicken');
 let index = 0;
 let translateValue = 0;
 let speed = 8; // Adjust the speed as needed
-const maxTranslateValue = 675; // Maximum translation value
+const maxTranslatePercentage = 50; // Adjust this percentage as needed
+const maxTranslateValue = (maxTranslatePercentage / 100) * window.innerHeight;
 let direction = 1; // 1 for moving right, -1 for moving left
 
 // Function to move chickens
