@@ -95,6 +95,23 @@ let speed = 8; // Adjust the speed as needed
 const maxTranslateValue = 600; // Maximum translation value
 let direction = 1; // 1 for moving right, -1 for moving left
 
+// Function to move chickens
+function moveChickens() {
+    chickens.forEach(chicken => chicken.style.opacity = 0);
+
+    if (translateValue >= maxTranslateValue) {
+        translateValue = 0;
+        chickens[index].style.opacity = 1;
+    } else {
+        translateValue += direction * speed;
+        chickens[index].style.display = 'block';
+        chickens[index].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+        chickens[index].style.opacity = 1;
+    }
+
+    index = (index + 1) % chickens.length;
+}
+
 // Call moveChickens directly
 moveChickens();
 
