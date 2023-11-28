@@ -86,8 +86,7 @@
 
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
-
-  <script>
+<script>
     // Right chicken
     let chickens = document.querySelectorAll('.chicken');
     let index = 0;
@@ -107,13 +106,16 @@
         if (translateValue >= maxTranslateValue) {
             // If the chicken reaches the maximum translation value, make it invisible
             chickens[index].style.opacity = 0;
-            
+
             // Set a timeout to make the chicken reappear after 2 seconds
-            const intervalId = setInterval(showNextChicken, 150);
-        }, 2000);
-            
+            setTimeout(() => {
+                chickens[index].style.opacity = 1;
+                showNextChicken(); // Call the function again to continue the animation
+            }, 2000);
+
             // Reset translateValue to continue rightward
-            //translateValue = 0;
+            translateValue = 0;
+            return; // Exit the function to avoid further execution in this iteration
         }
 
         // Continue moving the chicken
