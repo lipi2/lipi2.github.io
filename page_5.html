@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -93,7 +93,7 @@ let index = 0;
 let translateValue = 0;
 let speed = 8; // Adjust the speed as needed
 const maxTranslatePercentage = 80; // Adjust this percentage as needed
-const maxTranslateValue = (maxTranslatePercentage / 100) * window.innerHeight;
+const maxTranslateValue = (maxTranslatePercentage / 100) * document.documentElement.scrollHeight;
 let direction = 1; // 1 for moving right, -1 for moving left
 
 // Function to move chickens
