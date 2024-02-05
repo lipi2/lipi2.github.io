@@ -95,7 +95,7 @@ let index = 0;
 let translateValue = 0;
 let speed = 8; // Adjust the speed as needed
 const maxTranslatePercentage = 65; // Adjust this percentage as needed
-const maxTranslateValue = (maxTranslatePercentage / 100) //* document.documentElement.scrollHeight;
+const maxTranslateValue = (maxTranslatePercentage / 100) * window.innerHeight;
 //const maxTranslateValue = 750; // Set this value to a fixed pixel value (test)
 let direction = 1; // 1 for moving right, -1 for moving left
 
