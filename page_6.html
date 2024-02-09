@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -21,17 +21,16 @@
       text-align: center;
       margin-top: 20px;
     }
+   
     .chicken {
       max-width: 100%;
       max-height: 30vh;
-      margin-top: 10vh; /* Use percentage or viewport units for vertical positioning */
-      margin-bottom: 2vh;
-      left: 65vh; /* Use percentage or viewport units for horizontal positioning */
-      /* transform: translate3d(-50%, 0, 0); /* Center the chicken horizontally */
-      opacity: 1;
       position: absolute;
+      top: 50%;
+      left: 26%;
+      transform: translate(-50%, -50%) translateZ(0); /* Center the chicken both horizontally and vertically */
+      opacity: 1; /* Set initial opacity to 1 */
     }
-    
        
     #newText {
       position: relative;
@@ -42,21 +41,24 @@
       cursor: pointer; /* Set cursor to pointer on hover */
     }
     #Dro_logo {
-      position: relative;
-      top: -163px;
-      transform: scale(0.20);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(18%);
     }
+
      #pilar {
-      position: relative;
-      top: -450px;
-      left: 46vh;
-      transform: scale(1.5);
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      transform: translate(-50%, -50%) scale(110%);
     }
       #pilar2 {
-      position: relative;
-      top: -1350px;
-      left: -44vh;
-      transform: scale(1.5);
+      position: absolute;
+      top: 50%;
+      left: 75%;
+      transform: translate(-50%, -50%) scale(110%);
+        
     }
     h1, p {
       margin: 0;
@@ -78,8 +80,7 @@
   
   <!-- Chicken Images -->
   <!-- Removed the first chicken -->
-  <!-- <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 3">  -->
-  
+  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 3">
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 3">
   <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
   
@@ -93,8 +94,9 @@ let chickens = document.querySelectorAll('.chicken');
 let index = 0;
 let translateValue = 0;
 let speed = 8; // Adjust the speed as needed
-const maxTranslatePercentage = 70; // Adjust this percentage as needed
-const maxTranslateValue = (maxTranslatePercentage / 100) * window.innerHeight;
+//const maxTranslatePercentage = 65; // Adjust this percentage as needed
+const maxTranslateValue = document.getElementById('pilar2').offsetLeft - window.innerWidth / 3.2; // Set maxTranslateValue to the left position of #pilar
+//const maxTranslateValue = 750; // Set this value to a fixed pixel value (test)
 let direction = 1; // 1 for moving right, -1 for moving left
 
 // Function to move chickens
