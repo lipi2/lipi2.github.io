@@ -130,14 +130,6 @@ function moveChickens() {
     }
 
     index = (index + 1) % chickens.length;\
-
-  // Move chicken2
-    translateValue2 += direction2 * speed2;
-    chickens2.forEach(chicken2 => {
-        chicken2.style.display = 'block';
-        chicken2.style.transform = `translate3d(${translateValue2}px, 0, 0)`;
-        chicken2.style.opacity = 1;
-    });
 }
 
 // Call moveChickens directly
