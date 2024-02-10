@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: pink;
+      color: green;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -102,8 +102,8 @@ function moveChickens() {
     chickens.forEach(chicken => chicken.style.opacity = 0);
 
     if (translateValue >= maxTranslateValue) {
-        // Chicken reached max value, reset its position to a new random position
-        translateValue = Math.floor(Math.random() * window.innerWidth);
+        // Chicken reached max value, reset its position outside of the screen
+        translateValue = -chickens[index].width; // Set to a value beyond the screen width
         chickens[index].style.opacity = 1;
     } else {
         translateValue += direction * speed;
