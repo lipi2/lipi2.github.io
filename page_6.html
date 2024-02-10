@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -137,6 +137,35 @@ moveChickens();
 
 // Set interval to move chickens every 1 second (adjust as needed)
 const intervalId = setInterval(moveChickens, 150);
+
+// Second set of chickens
+let chickens2 = document.querySelectorAll('.chicken2');
+let index2 = 0;
+let translateValue2 = 0;
+
+// Function to move chickens2
+function moveChickens2() {
+    chickens2.forEach(chicken => chicken.style.opacity = 0);
+
+    if (translateValue2 >= maxTranslateValue) {
+        translateValue2 = 0;
+        chickens2[index2].style.opacity = 1;
+    } else {
+        translateValue2 += direction * speed;
+        chickens2[index2].style.display = 'block';
+        chickens2[index2].style.transform = `translate3d(${translateValue2}px, 0, 0)`;
+        chickens2[index2].style.opacity = 1;
+    }
+
+    index2 = (index2 + 1) % chickens2.length;
+}
+
+// Call moveChickens2 directly
+moveChickens2();
+
+// Set interval to move chickens2 every 1 second (adjust as needed)
+const intervalId2 = setInterval(moveChickens2, 150);
+
 
 // JavaScript function to navigate to page 1
 function goToPage1() {
