@@ -37,7 +37,7 @@
       max-height: 30vh;
       position: absolute;
       top: 50%;
-      left: 75%;
+      left: 775%;
       transform: translate(-50%, -50%) translateZ(0); /* Center the chicken both horizontally and vertically */
       opacity: 1; /* Set initial opacity to 1 */
     }
@@ -119,6 +119,7 @@ function moveChickens() {
     if (translateValue >= maxTranslateValue) {
         // Chicken reached max value, reset its position outside of the screen
         translateValue = -20000; // Set to a value beyond the screen width
+        translateValue2 = 50%
         chickens[index].style.opacity = 1;
     } else {
         translateValue += direction * speed;
@@ -141,7 +142,7 @@ let chickens2 = document.querySelectorAll('.chicken2');
 let index2 = 0;
 let translateValue2 = 0;
 let speed2 = 8; // Adjust the speed as needed
-const maxTranslateValue2 = document.getElementById('pilar').offsetLeft + window.innerWidth / 3.2; // Set maxTranslateValue2 to the right position of #pilar
+const maxTranslateValue2 = document.getElementById('pilar').offsetLeft + window.innerWidth / 2.2; // Set maxTranslateValue2 to the right position of #pilar
 let direction2 = -1; // 1 for moving right, -1 for moving left
 
 // Function to move chickens2
