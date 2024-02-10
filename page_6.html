@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: pink;
+      color: green;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -120,7 +120,10 @@
 
         if (translateValue >= maxTranslateValue) {
             translateValue = 0;
-            chickens.forEach(chicken => chicken.style.opacity = 1);
+            chickens.forEach(chicken => {
+                chicken.style.opacity = 1;
+                chicken.style.transform = `translate3d(${translateValue}px, -50%, 0)`;
+            });
             // When maxTranslateValue is reached, move .chicken2 to the middle
             moveChicken2ToMiddle();
         } else {
@@ -153,4 +156,5 @@
 
 </body>
 </html>
+
 
