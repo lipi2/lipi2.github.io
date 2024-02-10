@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -142,6 +142,7 @@ const intervalId = setInterval(moveChickens, 150);
 let chickens2 = document.querySelectorAll('.chicken2');
 let index2 = 0;
 let translateValue2 = 0;
+let direction = -1; // 1 for moving right, -1 for moving left
 
 // Function to move chickens2
 function moveChickens2() {
