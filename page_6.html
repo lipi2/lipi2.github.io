@@ -103,7 +103,7 @@ function moveChickens() {
 
     if (translateValue >= maxTranslateValue) {
         // Chicken reached max value, reset its position outside of the screen
-        translateValue = 20000; // Set to a value beyond the screen width
+        translateValue = -20000; // Set to a value beyond the screen width
         chickens[index].style.opacity = 1;
     } else {
         translateValue += direction * speed;
