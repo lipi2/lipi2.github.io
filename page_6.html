@@ -104,15 +104,13 @@
   <!-- New Text with ID "newText" -->
   <p id="newText" onclick="goToPage1()">BACK. </p>
 
-  <script>
+ <script>
 // Right chicken
 let chickens = document.querySelectorAll('.chicken');
 let index = 0;
 let translateValue = 0;
 let speed = 8; // Adjust the speed as needed
-//const maxTranslatePercentage = 65; // Adjust this percentage as needed
 const maxTranslateValue = document.getElementById('pilar2').offsetLeft - window.innerWidth / 3.2; // Set maxTranslateValue to the left position of #pilar
-//const maxTranslateValue = 750; // Set this value to a fixed pixel value (test)
 let direction = 1; // 1 for moving right, -1 for moving left
 
 // Function to move chickens
@@ -122,6 +120,8 @@ function moveChickens() {
     if (translateValue >= maxTranslateValue) {
         translateValue = 0;
         chickens[index].style.opacity = 1;
+        // When maxTranslateValue is reached, show .chicken2 in the middle
+        showChicken2InMiddle();
     } else {
         translateValue += direction * speed;
         chickens[index].style.display = 'block';
@@ -148,7 +148,7 @@ let direction2 = -1; // -1 for moving left
 function moveChickens2() {
     chickens2.forEach(chicken => chicken.style.opacity = 0);
 
-    if (translateValue2 >= maxTranslateValue) {
+    if (translateValue2 <= -maxTranslateValue) {
         translateValue2 = 0;
         chickens2[index2].style.opacity = 1;
     } else {
@@ -167,12 +167,17 @@ moveChickens2();
 // Set interval to move chickens2 every 1 second (adjust as needed)
 const intervalId2 = setInterval(moveChickens2, 150);
 
+// Function to show .chicken2 in the middle of the screen
+function showChicken2InMiddle() {
+    let chicken2Container = document.querySelector('.chicken2-container');
+    chicken2Container.style.display = 'block';
+}
 
 // JavaScript function to navigate to page 1
 function goToPage1() {
     window.location.href = "https://lipi2.github.io";
 }
+</script>
 
-  </script>
 </body>
 </html>
