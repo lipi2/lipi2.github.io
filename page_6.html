@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -21,20 +21,28 @@
       text-align: center;
       margin-top: 20px;
     }
-   
-    .chicken, .chicken_Left {
+
+    /* Styles for .chicken */
+    .chicken {
       max-width: 100%;
       max-height: 30vh;
       position: absolute;
       top: 50%;
-      transform: translate(-50%, -50%) translateZ(0); /* Center the chicken both horizontally and vertically */
+      left: 26%; /* Adjusted back to the original position */
       opacity: 1; /* Set initial opacity to 1 */
     }
 
+    /* Styles for .chicken_Left */
     .chicken_Left {
-      left: 26%;
+      max-width: 100%;
+      max-height: 30vh;
+      position: absolute;
+      top: 50%;
+      right: 26%; /* Adjusted back to the original position */
+      opacity: 1; /* Set initial opacity to 1 */
+      transform: scaleX(-1); /* Flip the image horizontally */
     }
-       
+
     #newText {
       position: absolute;
       top: 20%;
@@ -97,72 +105,71 @@
   <p id="newText" onclick="goToPage1()">BACK. </p>
 
   <script>
-// Right chicken
-let chickens = document.querySelectorAll('.chicken');
-let index = 0;
-let translateValue = 0;
-let speed = 8; // Adjust the speed as needed
-const maxTranslateValue = document.getElementById('pilar2').offsetLeft - window.innerWidth / 3.2; // Set maxTranslateValue to the left position of #pilar
-let direction = 1; // 1 for moving right, -1 for moving left
+    // Right chicken
+    let chickens = document.querySelectorAll('.chicken');
+    let index = 0;
+    let translateValue = 0;
+    let speed = 8; // Adjust the speed as needed
+    const maxTranslateValue = document.getElementById('pilar2').offsetLeft - window.innerWidth / 3.2; // Set maxTranslateValue to the left position of #pilar
+    let direction = 1; // 1 for moving right, -1 for moving left
 
-// Function to move chickens
-function moveChickens() {
-    chickens.forEach(chicken => chicken.style.opacity = 0);
+    // Function to move chickens
+    function moveChickens() {
+        chickens.forEach(chicken => chicken.style.opacity = 0);
 
-    if (translateValue >= maxTranslateValue) {
-        translateValue = 0;
-        chickens[index].style.opacity = 1;
-    } else {
-        translateValue += direction * speed;
-        chickens[index].style.display = 'block';
-        chickens[index].style.transform = `translate3d(${translateValue}px, -50%, 0)`;
-        chickens[index].style.opacity = 1;
+        if (translateValue >= maxTranslateValue) {
+            translateValue = 0;
+            chickens[index].style.opacity = 1;
+        } else {
+            translateValue += direction * speed;
+            chickens[index].style.display = 'block';
+            chickens[index].style.transform = `translate3d(${translateValue}px, -50%, 0)`;
+            chickens[index].style.opacity = 1;
+        }
+
+        index = (index + 1) % chickens.length;
     }
 
-    index = (index + 1) % chickens.length;
-}
+    // Call moveChickens directly
+    moveChickens();
 
-// Call moveChickens directly
-moveChickens();
+    // Set interval to move chickens every 1 second (adjust as needed)
+    const intervalId = setInterval(moveChickens, 150);
 
-// Set interval to move chickens every 1 second (adjust as needed)
-const intervalId = setInterval(moveChickens, 150);
+    // Left chicken
+    let chickens_Left = document.querySelectorAll('.chicken_Left');
+    let index_Left = 0;
+    let translateValue_Left = 0;
+    let speed_Left = 8; // Adjust the speed as needed
+    const maxTranslateValue_Left = document.getElementById('pilar').offsetLeft + window.innerWidth / 3.2; // Set maxTranslateValue to the right position of #pilar
 
-// Left chicken
-let chickens_Left = document.querySelectorAll('.chicken_Left');
-let index_Left = 0;
-let translateValue_Left = 0;
-let speed_Left = 8; // Adjust the speed as needed
-const maxTranslateValue_Left = document.getElementById('pilar').offsetLeft + window.innerWidth / 3.2; // Set maxTranslateValue to the right position of #pilar
+    // Function to move left chickens
+    function moveLeftChickens() {
+        chickens_Left.forEach(chicken => chicken.style.opacity = 0);
 
-// Function to move left chickens
-function moveLeftChickens() {
-    chickens_Left.forEach(chicken => chicken.style.opacity = 0);
+        if (translateValue_Left <= maxTranslateValue_Left) {
+            translateValue_Left = 0;
+            chickens_Left[index_Left].style.opacity = 1;
+        } else {
+            translateValue_Left -= speed_Left;
+            chickens_Left[index_Left].style.display = 'block';
+            chickens_Left[index_Left].style.transform = `translate3d(${translateValue_Left}px, -50%, 0) scaleX(-1)`;
+            chickens_Left[index_Left].style.opacity = 1;
+        }
 
-    if (translateValue_Left <= maxTranslateValue_Left) {
-        translateValue_Left = 0;
-        chickens_Left[index_Left].style.opacity = 1;
-    } else {
-        translateValue_Left -= speed_Left;
-        chickens_Left[index_Left].style.display = 'block';
-        chickens_Left[index_Left].style.transform = `translate3d(${translateValue_Left}px, -50%, 0) scaleX(-1)`;
-        chickens_Left[index_Left].style.opacity = 1;
+        index_Left = (index_Left + 1) % chickens_Left.length;
     }
 
-    index_Left = (index_Left + 1) % chickens_Left.length;
-}
+    // Call moveLeftChickens directly
+    moveLeftChickens();
 
-// Call moveLeftChickens directly
-moveLeftChickens();
+    // Set interval to move left chickens every 1 second (adjust as needed)
+    const intervalId_Left = setInterval(moveLeftChickens, 150);
 
-// Set interval to move left chickens every 1 second (adjust as needed)
-const intervalId_Left = setInterval(moveLeftChickens, 150);
-
-// JavaScript function to navigate to page 1
-function goToPage1() {
-    window.location.href = "https://lipi2.github.io";
-}
+    // JavaScript function to navigate to page 1
+    function goToPage1() {
+        window.location.href = "https://lipi2.github.io";
+    }
   </script>
 </body>
 </html>
-
