@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -173,6 +173,14 @@
     // JavaScript function to navigate to page 5
     function goToPage5() {
       window.location.href = "https://lipi2.github.io/page_5.html";
+    }
+
+    // JavaScript function to handle registration form submission
+    function registerUser(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      alert(`Username: ${username}\nPassword: ${password}`);
     }
   </script>
   
