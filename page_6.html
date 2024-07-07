@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chicken Animation</title>
+  <title>DRO menu</title>
   <style>
     body {
       background-color: black;
@@ -22,154 +22,169 @@
       margin-top: 20px;
     }
 
-    /* Styles for .chicken */
-    .chicken {
-      max-width: 100%;
-      max-height: 30vh;
-      position: absolute;
-      top: 50%;
-      left: 26%; /* Adjusted back to the original position */
-      opacity: 1; /* Set initial opacity to 1 */
-    }
-
-    /* Styles for .chicken_Left */
-    .chicken_Left {
-      max-width: 100%;
-      max-height: 30vh;
-      position: absolute;
-      top: 50%;
-      right: 26%; /* Adjusted back to the original position */
-      opacity: 1; /* Set initial opacity to 1 */
-      transform: scaleX(-1); /* Flip the image horizontally */
-    }
-
-    #newText {
-      position: absolute;
-      top: 20%;
-      text-align: center;
-      font-size: 16px; /* Adjust the font size as needed */
-      color: red;
-      cursor: pointer; /* Set cursor to pointer on hover */
-    }
     #Dro_logo {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(18%);
+      position: relative;
+      top: -10%;
+      left: 0%;
+      transform: scale(18%);
     }
-
-    #pilar, #pilar2 {
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(110%);
-    }
+    
 
     #pilar {
-      left: 25%;
+      position: absolute;
+      top: 20%;
+      left: 15%;
+      transform: scale(1.5);
     }
 
     #pilar2 {
-      left: 75%;
+      position: absolute;
+      top: 20%;
+      left: 82%;
+      transform: scale(1.5);
+    }
+
+    #box_00 {
+      position: relative;
+      transform: scale(0.75);
+      left: -275px;
+      top: -1292px;
+      opacity: 0;
+    }
+
+    #page2 {
+      position: absolute;
+      top: 10%; /* Adjust the position as needed */
+      left: 20%;
+      font-size: 15px; /* Adjust the font size as needed */
+      color: #3CC224;
+      cursor: pointer; /* Set cursor to pointer on hover */
+    }
+
+    #page3 {
+      position: absolute;
+      top: 20%; /* Adjust the position as needed */
+      left: 20%;
+      font-size: 15px; /* Adjust the font size as needed */
+      color:  #3CC224;
+      cursor: pointer; /* Set cursor to pointer on hover */
+    }
+
+    #page4 {
+      position: absolute;
+      top: 30%; /* Adjust the position as needed */
+      left: 20%;
+      font-size: 15px; /* Adjust the font size as needed */
+      color:  #3CC224;
+      cursor: pointer; /* Set cursor to pointer on hover */
+    }
+
+     #page5 {
+      position: absolute;
+      top: 40%; /* Adjust the position as needed */
+      left: 20%;
+      font-size: 15px; /* Adjust the font size as needed */
+      color:  #3CC224;
+      cursor: pointer; /* Set cursor to pointer on hover */
     }
 
     h1, p {
       margin: 0;
     }
+
     .logo-link {
       display: inline-block;
       margin-top: 20px;
     }
+    
+    .video-container {
+      position: absolute; /* Change position to absolute */
+      top: 50%; /* Adjust the vertical position */
+      left: 35%; /* Adjust the horizontal position */
+    }
+
+    .form-container {
+      position: absolute; 
+      top: 60%; 
+      left: 50%; 
+      transform: translate(-50%, -50%);
+      background-color: white;
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .form-container input {
+      margin: 50px;
+    }
+    
   </style>
 </head>
 <body>
   <div class="text-container">
-    <h1>Web page under construction.</h1>
-    <p>This is my first web page.</p>
+    <h1>DRO first Web page.</h1>
+    <p>Coding repository.</p>
   </div>
+  
   <img id="Dro_logo" src="https://raw.githubusercontent.com/lipi2/DRO_01/main/DRO_01.png" alt="DRO logo">
   <img id="pilar" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
   <img id="pilar2" src="https://raw.githubusercontent.com/lipi2/rs_pilar_01/main/rs2_pillar_02.png" alt="rs2 pilar">
-  
-  <!-- Chicken Images -->
-  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 3">
-  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 3">
-  <img class="chicken" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
+  <img id="box_00" src="https://raw.githubusercontent.com/lipi2/text_box_03/main/lipi2_text_box_05.png" alt="This is text box 00">
 
-  <!-- Chicken_Left Images -->
-  <img class="chicken_Left" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_01.png" alt="Chicken 3">
-  <img class="chicken_Left" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_02.png" alt="Chicken 3">
-  <img class="chicken_Left" src="https://raw.githubusercontent.com/lipi2/chicken/main/chicken_03.png" alt="Chicken 3">
-  
+   <!-- New Text with ID "page2" -->
+  <p id="page2" onclick="goToPage2()">A1 </p>
 
-  <!-- New Text with ID "newText" -->
-  <p id="newText" onclick="goToPage1()">BACK. </p>
+   <!-- New Text with ID "page3" -->
+  <p id="page3" onclick="goToPage3()">A2 </p>
+
+  <!-- New Text with ID "page4" -->
+  <p id="page4" onclick="goToPage4()">A3 </p>
+
+  <!-- New Text with ID "page5" -->
+  <p id="page5" onclick="goToPage5()">A4 </p>
+
+  <!-- YouTube video -->
+  <div class="video-container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/cTE3D0uMVNs" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <!-- Simple registration form -->
+  <div class="form-container">
+    <h2>Register</h2>
+    <form onsubmit="registerUser(event)">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Register</button>
+    </form>
+  </div>
 
   <script>
-    // Right chicken
-    let chickens = document.querySelectorAll('.chicken');
-    let index = 0;
-    let translateValue = 0;
-    let speed = 8; // Adjust the speed as needed
-    const maxTranslateValue = document.getElementById('pilar2').offsetLeft - window.innerWidth / 3.2; // Set maxTranslateValue to the left position of #pilar
-    let direction = 1; // 1 for moving right, -1 for moving left
-
-    // Function to move chickens
-    function moveChickens() {
-        chickens.forEach(chicken => chicken.style.opacity = 0);
-
-        if (translateValue >= maxTranslateValue) {
-            translateValue = 0;
-            chickens[index].style.opacity = 1;
-        } else {
-            translateValue += direction * speed;
-            chickens[index].style.display = 'block';
-            chickens[index].style.transform = `translate3d(${translateValue}px, -50%, 0)`;
-            chickens[index].style.opacity = 1;
-        }
-
-        index = (index + 1) % chickens.length;
-    }
-
-    // Call moveChickens directly
-    moveChickens();
-
-    // Set interval to move chickens every 1 second (adjust as needed)
-    const intervalId = setInterval(moveChickens, 150);
-
-    // Left chicken
-    let chickens_Left = document.querySelectorAll('.chicken_Left');
-    let index_Left = 0;
-    let translateValue_Left = 0;
-    let speed_Left = 8; // Adjust the speed as needed
-    const maxTranslateValue_Left = document.getElementById('pilar').offsetLeft + window.innerWidth / 3.2; // Set maxTranslateValue to the right position of #pilar
-
-    // Function to move left chickens
-    function moveLeftChickens() {
-        chickens_Left.forEach(chicken => chicken.style.opacity = 0);
-
-        if (translateValue_Left <= maxTranslateValue_Left) {
-            translateValue_Left = 0;
-            chickens_Left[index_Left].style.opacity = 1;
-        } else {
-            translateValue_Left -= speed_Left;
-            chickens_Left[index_Left].style.display = 'block';
-            chickens_Left[index_Left].style.transform = `translate3d(${translateValue_Left}px, -50%, 0) scaleX(-1)`;
-            chickens_Left[index_Left].style.opacity = 1;
-        }
-
-        index_Left = (index_Left + 1) % chickens_Left.length;
-    }
-
-    // Call moveLeftChickens directly
-    moveLeftChickens();
-
-    // Set interval to move left chickens every 1 second (adjust as needed)
-    const intervalId_Left = setInterval(moveLeftChickens, 150);
-
-    // JavaScript function to navigate to page 1
-    function goToPage1() {
-        window.location.href = "https://lipi2.github.io";
+    // JavaScript function to navigate to page 2
+    function goToPage2() {
+      window.location.href = "https://lipi2.github.io/page_2.html";
     }
   </script>
+
+   <script>
+    // JavaScript function to navigate to page 3
+    function goToPage3() {
+      window.location.href = "https://lipi2.github.io/page_3.html";
+    }
+  </script>
+
+  <script>
+    // JavaScript function to navigate to page 4
+    function goToPage4() {
+      window.location.href = "https://lipi2.github.io/page_4.html";
+    }
+  </script>
+
+   <script>
+    // JavaScript function to navigate to page 5
+    function goToPage5() {
+      window.location.href = "https://lipi2.github.io/page_5.html";
+    }
+  </script>
+  
 </body>
 </html>
