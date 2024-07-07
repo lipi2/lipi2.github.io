@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -146,6 +146,16 @@
   <!-- YouTube video -->
   <div class="video-container">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/cTE3D0uMVNs" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <!-- Simple registration form -->
+  <div class="form-container">
+    <h2>Register</h2>
+    <form onsubmit="registerUser(event)">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Register</button>
+    </form>
   </div>
 
   <script>
