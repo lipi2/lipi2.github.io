@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -217,6 +217,29 @@
       localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
 
       alert(`Registration successful!\nUsername: ${username}\nPassword: ${password}`);
+    }
+
+
+    // JavaScript function to handle login form submission
+    function loginUser(event) {
+      event.preventDefault();
+      const loginUsername = document.getElementById('loginUsername').value;
+      const loginPassword = document.getElementById('loginPassword').value;
+
+      // Retrieve registered users from local storage
+      const existingUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+      const user = existingUsers.find(user => user.username === loginUsername && user.password === loginPassword);
+
+      if (!user) {
+        alert("Invalid username or password. Please try again.");
+        return;
+      }
+
+      alert(`Login successful!\nWelcome back, ${loginUsername}!`);
+
+      // Optional: Clear the login form after successful login
+      document.getElementById('loginUsername').value = '';
+      document.getElementById('loginPassword').value = '';
     }
   </script>
   
