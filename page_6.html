@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -150,6 +150,16 @@
       <input type="text" id="username" placeholder="Username" required>
       <input type="password" id="password" placeholder="Password" required>
       <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <!-- Login form -->
+  <div class="form-container" id="login-form">
+    <h2>Login</h2>
+    <form onsubmit="loginUser(event)">
+      <input type="text" id="loginUsername" placeholder="Username" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button type="submit">Login</button>
     </form>
   </div>
 
