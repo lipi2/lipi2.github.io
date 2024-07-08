@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -236,6 +236,9 @@
       }
 
       alert(`Login successful!\nWelcome back, ${loginUsername}!`);
+
+      // Redirect user to another page after successful login
+      window.location.href = "https://lipi2.github.io"; // Replace with your desired page URL
 
       // Optional: Clear the login form after successful login
       document.getElementById('loginUsername').value = '';
