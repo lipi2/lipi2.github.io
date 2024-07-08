@@ -198,6 +198,7 @@
     
      // Store user data in local storage
       const userData = { username, password };
+      existingUsers.push(newUser);
       localStorage.setItem('registeredUser', JSON.stringify(userData));
 
       alert(`Registration successful!\nUsername: ${username}\nPassword: ${password}`);
