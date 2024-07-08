@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: blue;
+      color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -237,8 +237,12 @@
 
       alert(`Login successful!\nWelcome back, ${loginUsername}!`);
 
+      // Save the logged-in user to session storage (for demonstration)
+      sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+
+
       // Redirect user to another page after successful login
-      window.location.href = "https://lipi2.github.io"; // Replace with your desired page URL
+      window.location.href = "https://lipi2.github.io/page_5.html"; // Replace with your desired page URL
 
       // Optional: Clear the login form after successful login
       document.getElementById('loginUsername').value = '';
