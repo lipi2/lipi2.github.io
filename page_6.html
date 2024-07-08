@@ -180,7 +180,13 @@
       event.preventDefault();
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
-      alert(`Username: ${username}\nPassword: ${password}`);
+    }
+    
+     // Store user data in local storage
+      const userData = { username, password };
+      localStorage.setItem('registeredUser', JSON.stringify(userData));
+
+      alert(`Registration successful!\nUsername: ${username}\nPassword: ${password}`);
     }
   </script>
   
