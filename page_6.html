@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: black;
-      color: red;
+      color: blue;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -199,7 +199,7 @@
      // Store user data in local storage
       const newUser = { username, password };
       existingUsers.push(newUser);
-      localStorage.setItem('registeredUsers', JSON.stringify(userData));
+      localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
 
       alert(`Registration successful!\nUsername: ${username}\nPassword: ${password}`);
     }
