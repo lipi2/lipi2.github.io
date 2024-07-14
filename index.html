@@ -112,6 +112,28 @@
       left: 35%; /* Adjust the horizontal position */
     }
 
+    /* Chatbox styling */
+    .chat-container {
+      position: absolute;
+      top: 10%;
+      right: 5%;
+      width: 250px;
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .chat-messages {
+      height: 200px;
+      overflow-y: scroll;
+    }
+
+    .chat-input {
+      width: 100%;
+      margin-top: 10px;
+    }
+
   </style>
 </head>
 <body>
@@ -144,6 +166,33 @@
   <div class="video-container">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/cTE3D0uMVNs" frameborder="0" allowfullscreen></iframe>
   </div>
+
+  <!-- Chatbox -->
+  <div class="chat-container">
+    <div class="chat-messages" id="chat-messages">
+      <!-- Chat messages will be added here dynamically -->
+    </div>
+    <input type="text" class="chat-input" id="chat-input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+   <script>
+    // Function to send message
+    function sendMessage() {
+      var messageInput = document.getElementById("chat-input");
+      var message = messageInput.value;
+      messageInput.value = ""; // Clear input field after sending message
+
+      // Create a new message element
+      var newMessage = document.createElement("div");
+      newMessage.textContent = message;
+      newMessage.style.marginBottom = "5px";
+
+      // Append the new message to chat-messages
+      var chatMessages = document.getElementById("chat-messages");
+      chatMessages.appendChild(newMessage);
+    }
+  </script>
   
 
   <script>
